@@ -1,41 +1,40 @@
 <?php
+
 require '../backend/config.php';
+$errMsg = '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['signup'])) {
+if (isset($_POST['signup'])) {
     // Obtén los datos del formulario
-    $nombre = $_POST['name'];
-    $apellido = $_POST['apellido'];
-    $identificacion = $_POST['id'];
-    $usuario = $_POST['usuario'];
-    $clave = $_POST['clave'];
-    $numero = $_POST['numero'];
-    $tiene_seguro = isset($_POST['tiene_seguro']) ? $_POST['tiene_seguro'] : 'No'; // Valor predeterminado si no se selecciona seguro
-    $genero = isset($_POST['genero']);
+    $name = $_POST['name'];
+    $last_name = $_POST['last_name'];
+    $ID = $_POST['ID'];
+    $pass = MD5($_POST['password']);
+    $email = $_POST['email'];
+    $user_name = $_POST['user_name'];
+    $phone_num = $_POST['phone_num'];
 
-    // Realiza la inserción en la base de datos (cambia la consulta y la conexión según tu configuración)
     try {
 
-        $sql = "INSERT INTO usuarios (dnipa, nombrep, apellidop, seguro, tele, sexo, usuario, clave, cargo, estado, fecha_create) VALUES (:identificacion, :nombre, :apellido, :tiene_seguro, :numero, :genero, :usuario, :clave, 2, 1, '2023-10-04 11:38:57')";
+        $sql = "INSERT INTO  usuarios(nombre, apellido, identificacion, correo, password, user, tel) VALUES (:name, :last_name, :ID, :email, :pass, :user_name, :phone_num)";
 
-        $stmt = $conn->prepare($sql);
+        $stmt = $connect->prepare($sql);
 
-        $stmt->bindParam(':nombre', $nombre);
-        $stmt->bindParam(':apellido', $apellido);
-        $stmt->bindParam(':identificacion', $identificacion);
-        $stmt->bindParam(':usuario', $usuario);
-        $stmt->bindParam(':clave', $clave);
-        $stmt->bindParam(':numero', $numero);
-        $stmt->bindParam(':tiene_seguro', $tiene_seguro);
-        $stmt->bindParam(':genero', $genero);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':last_name', $last_name);
+        $stmt->bindParam(':ID', $ID);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':pass', $pass);
+        $stmt->bindParam(':user_name', $user_name);
+        $stmt->bindParam(':phone_num', $phone_num);
 
-
+        
+        
         $stmt->execute();
-
         // Redirecciona a la página de inicio de sesión después del registro
-        header('Location: ../login.php');
+        header('Location: ../frontend/login.php');
         exit();
     } catch (PDOException $e) {
-        echo "Error al registrar el usuario: " . $e->getMessage();
+        echo "Error de SQL: " . $e->getMessage();
     }
 }
 ?>

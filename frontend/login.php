@@ -22,17 +22,24 @@ include_once '../backend/login.php'
         <img class="img-fluid logo-img" src="../img/logo-login.svg" alt="Logo DocMe">
         <div class="contenido-login">
             <form autocomplete="off" method="POST"  role="form">
+            <?php
+            if(isset($errMsg)){
+                echo '<div style="color:#FF0000;text-align:center;font-size:20px;">'.$errMsg.'</div>';  
+            }
+        ?>
             <h3>Bienvenido a DocMe</h3>
+
+      
 
     <div class="input-div nit">
         <div class="div">
-             <input type="text"  name="usuario" value="<?php if(isset($_POST['usuario'])) echo $_POST['usuario'] ?>" autocomplete="off" placeholder="Usuario">
+             <input type="text"  name="user_name" value="<?php if(isset($_POST['user_name'])) echo $_POST['user_name'] ?>" autocomplete="off" placeholder="Usuario">
         </div>
     </div>
 
     <div class="input-div pass">
         <div class="div">
-            <input type="password" required="true" name="clave" value="<?php if(isset($_POST['clave'])) echo $_POST['clave'] ?>" placeholder="Contraseña" >
+            <input type="password" required="true" name="pass" value="<?php if(isset($_POST['password'])) echo $_POST['password'] ?>" placeholder="Contraseña" >
         </div>
     </div>
     

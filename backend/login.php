@@ -4,23 +4,23 @@ if(isset($_POST['login'])) {
     $errMsg = '';
 
     // Get data from FORM
-    $usuario = $_POST['usuario'];
-    $clave = $_POST['clave'];
+    $user_name = $_POST['user_name'];
+    $pass = $_POST['pass'];
 
     //Comprobar campos
 
-    if($usuario == '')
+    if($user_name == '')
       $errMsg = 'Digite su usuario';
-    if($clave == '')
+    if($pass == '')
       $errMsg = 'Digite su contraseña';
 
     if($errMsg == '') {
       try {
-$stmt = $connect->prepare('SELECT id, nombre, usuario, email,clave, cargo FROM usuarios WHERE usuario = :usuario UNION SELECT codpaci, nombrep,apellidop, usuario, clave, cargo FROM customers WHERE usuario = :usuario');
+        $stmt = $connect->prepare('SELECT id_user, nombre, correo,password, user  FROM usuarios WHERE user = :user_name');
 
 
         $stmt->execute(array(
-          ':usuario' => $usuario
+          ':user_name' => $user_name
           
           
           ));
@@ -30,24 +30,19 @@ $stmt = $connect->prepare('SELECT id, nombre, usuario, email,clave, cargo FROM u
           $errMsg = "Usuario $usuario no encontrado.";
         }
         else {
-          if($clave == $data['clave']) {
+          if($pass == $data['password']) {
 
-            $_SESSION['id'] = $data['id'];
-            $_SESSION['nombre'] = $data['nombre'];
-            $_SESSION['usuario'] = $data['usuario'];
-            $_SESSION['email'] = $data['email'];
-            $_SESSION['clave'] = $data['clave'];
-            $_SESSION['cargo'] = $data['cargo'];
+            $_SESSION['id'] = $data['id_user'];
+            $_SESSION['name'] = $data['nombre'];
+            $_SESSION['user_name'] = $data['user'];
+            $_SESSION['email'] = $data['correo'];
+            $_SESSION['pass'] = $data['password'];
             
             
             
-    if($_SESSION['cargo'] == 1){
-          header('Location: #');
-        }else if($_SESSION['cargo'] == 2){
-          header('Location: #');
+    if($_SESSION['id'] == $data['id_user']){//compara el id de la sesion con el de la base de datos, luego redirige a la pagina del login
+          header('location:../frontend/signup.php');
         }
-        
-        
             exit;
           }
           else

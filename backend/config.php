@@ -3,7 +3,7 @@
 define('dbhost', 'localhost');
 define('dbuser', 'root');
 define('dbpass', '');
-define('dbname', 'docme');
+define('dbname', 'docme1');
 
 // Connecting database
 try {
