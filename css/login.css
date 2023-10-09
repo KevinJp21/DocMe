@@ -62,6 +62,10 @@ body{
     color: var(--text-white);
 }
 
+::placeholder{
+    color: rgb(175, 170, 170);
+}
+
 
 
 .logo-img{
