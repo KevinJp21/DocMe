@@ -5,7 +5,7 @@ if(isset($_POST['login'])) {
 
     // Get data from FORM
     $user_name = $_POST['user_name'];
-    $pass = $_POST['pass'];
+    $pass = MD5($_POST['pass']);
 
     //Comprobar campos
 

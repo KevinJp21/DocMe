@@ -37,13 +37,13 @@ include_once '../backend/signup.php'
 
     <div class="input-div">
         <div class="div">
-             <input type="text"  name="name" required="true" value="<?php if(isset($_POST['name'])) echo $_POST['name'] ?>" autocomplete="off" placeholder="Nombre">
+             <input type="text"  name="name" value="<?php if(isset($_POST['name'])) echo $_POST['name'] ?>" autocomplete="off" placeholder="Nombre">
         </div>
     </div>
 
     <div class="input-div">
         <div class="div">
-            <input type="text" required="true" name="last_name" value="<?php if(isset($_POST['last_name'])) echo $_POST['last_name'] ?>" autocomplete="off" placeholder="Apellido" >
+            <input type="text"  name="last_name" value="<?php if(isset($_POST['last_name'])) echo $_POST['last_name'] ?>" autocomplete="off" placeholder="Apellido" >
         </div>
     </div>
     </div>
@@ -52,13 +52,13 @@ include_once '../backend/signup.php'
 
     <div class="input-div">
         <div class="div">
-        <input type="text" required="true" name="ID" value="<?php if(isset($_POST['ID'])) echo $_POST['ID'] ?>" autocomplete="off" placeholder="Identificacion" >
+        <input type="text"  name="ID" value="<?php if(isset($_POST['ID'])) echo $_POST['ID'] ?>" autocomplete="off" placeholder="Identificacion" >
         </div>
     </div>
 
     <div class="input-div">
         <div class="div">
-            <input type="email" required="true" name="email" value="<?php if(isset($_POST['email'])) echo $_POST['email'] ?>" autocomplete="off" placeholder="Correo" >
+            <input type="email"  name="email" value="<?php if(isset($_POST['email'])) echo $_POST['email'] ?>" autocomplete="off" placeholder="Correo" >
         </div>
     </div>
     </div>
@@ -66,13 +66,13 @@ include_once '../backend/signup.php'
 
     <div class="input-div">
         <div class="div">
-        <input type="password" required="true" id="pass" name="password" value="<?php if(isset($_POST['password'])) echo $_POST['password'] ?>" autocomplete="off" placeholder="Contraseña" >
+        <input type="password"  id="pass" name="password" value="<?php if(isset($_POST['password'])) echo $_POST['password'] ?>" autocomplete="off" placeholder="Contraseña" >
         </div>
     </div>
 
     <div class="input-div">
         <div class="div">
-        <input type="password" required="true"  id="conf_pass" name="conf_password" autocomplete="off" placeholder="Confirmar contraseña" >
+        <input type="password"   id="conf_pass" name="conf_password" autocomplete="off" placeholder="Confirmar contraseña" >
         </div>
     </div>
     
@@ -96,13 +96,13 @@ include_once '../backend/signup.php'
     <div class="col-md-6">
     <div class="input-div">
         <div class="div">
-        <input type="text" required="true" name="user_name" value="<?php if(isset($_POST['user_name'])) echo $_POST['user_name'] ?>" autocomplete="off" placeholder="Nombre de usuario" >
+        <input type="text"  name="user_name" value="<?php if(isset($_POST['user_name'])) echo $_POST['user_name'] ?>" autocomplete="off" placeholder="Nombre de usuario" >
         </div>
     </div>
 
     <div class="input-div">
         <div class="div">
-        <input type="text" required="true" name="phone_num" value="<?php if(isset($_POST['phone_num'])) echo $_POST['phone_num'] ?>" autocomplete="off" placeholder="Numero de celular" >
+        <input type="text"  name="phone_num" value="<?php if(isset($_POST['phone_num'])) echo $_POST['phone_num'] ?>" autocomplete="off" placeholder="Numero de celular" >
         </div>
     </div>
     </div>
