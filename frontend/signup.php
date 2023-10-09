@@ -72,7 +72,7 @@ include_once '../backend/signup.php'
 
     <div class="input-div">
         <div class="div">
-        <input type="password"   id="conf_pass" name="conf_password" autocomplete="off" placeholder="Confirmar contraseña" >
+        <input type="password"   id="conf_pass" name="conf_password" value="<?php if(isset($_POST['conf_password'])) echo $_POST['conf_password'] ?>" autocomplete="off" placeholder="Confirmar contraseña" >
         </div>
     </div>
     
