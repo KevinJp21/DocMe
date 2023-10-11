@@ -95,6 +95,7 @@ form{
     position: relative;
     margin: 25px 0;
     padding: 5px 0;
+    width: 90%;
     border-bottom: 1px solid var(--border-color);
 }
 
