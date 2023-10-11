@@ -17,12 +17,8 @@ if(isset($_POST['login'])) {
     if($errMsg == '') {
       try {
         $stmt = $connect->prepare('SELECT id_user, nombre, correo,password, user  FROM usuarios WHERE user = :user_name');
-
-
         $stmt->execute(array(
           ':user_name' => $user_name
-          
-          
           ));
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
