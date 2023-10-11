@@ -84,8 +84,6 @@ form{
 
 .contenido-login .input-div{
     position: relative;
-    display: grid;
-    grid-template-columns: 7% 93%;
     margin: 25px 0;
     padding: 5px 0;
     border-bottom: 1px solid var(--border-color);
@@ -121,13 +119,13 @@ form{
 .input-div.pass{
     margin-bottom: 4px;
 }
-.recovery-pass{
+.link{
     text-decoration: none;
     color: #FFFFFF;
     font-size: 0.9rem;
     margin-top: 50px;
 }
-.recovery-pass:hover{
+.link:hover{
     color: #25c3f8;
     text-decoration:underline;
 }
@@ -147,7 +145,7 @@ form{
 .btn{
     display: block;
     width: 100%;
-    height: 50px;
+    height: 45px;
     box-shadow:0px 5px 6px rgba(0, 0, 0, .3);;
     border-radius: 25px;
     outline: none;
@@ -158,7 +156,6 @@ form{
     font-size: 1.2rem;
     color: #fff;
     font-family: 'Poppins', sans-serif;
-    margin-top: 50px;
     cursor: pointer;
     transition: .5s;
 }

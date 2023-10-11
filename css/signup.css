@@ -93,14 +93,13 @@ form{
 }
 .contenido-login .input-div{
     position: relative;
-    display: grid;
-    grid-template-columns: 7% 93%;
     margin: 25px 0;
     padding: 5px 0;
     border-bottom: 1px solid var(--border-color);
 }
 
 .input-div .div input{
+    display: flex;
     height: 100%;
     border: none;
     outline: none;
@@ -135,14 +134,14 @@ form{
     text-decoration:underline;
 }
 
-.signUp{
+.link{
     text-decoration: none;
     color: #FFFFFF;
     font-size: 0.9rem;
     margin-top: 2px;
 
 }
-.signUp:hover{
+.link:hover{
     color: #25c3f8;
     text-decoration:underline;
 

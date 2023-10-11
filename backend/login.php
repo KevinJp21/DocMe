@@ -5,7 +5,7 @@ if(isset($_POST['login'])) {
 
     // Get data from FORM
     $user_name = $_POST['user_name'];
-    $pass = MD5($_POST['pass']);
+    $pass = $_POST['pass'];
 
     //Comprobar campos
 
@@ -27,7 +27,7 @@ if(isset($_POST['login'])) {
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if($data == false){
-          $errMsg = "Usuario $usuario no encontrado.";
+          $errMsg = "Usuario $user_name no encontrado.";
         }
         else {
           if($pass == $data['password']) {

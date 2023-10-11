@@ -2,10 +2,6 @@
 
 require '../backend/config.php';
 
-
-
-
-
 if (isset($_POST['signup'])) {
     $errMsg = '';
 
@@ -13,7 +9,7 @@ if (isset($_POST['signup'])) {
     $name = $_POST['name'];
     $last_name = $_POST['last_name'];
     $ID = $_POST['ID'];
-    $pass = MD5($_POST['password']);
+    $pass = $_POST['password'];
     $email = $_POST['email'];
     $user_name = $_POST['user_name'];
     $phone_num = $_POST['phone_num'];

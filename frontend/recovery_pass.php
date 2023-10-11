@@ -1,10 +1,10 @@
 <?php 
 error_reporting(0); //poner slash para quitar logs/errores de consola
 session_start();
-    if (isset($_SESSION['id'])){
-        header('Location: administrador/escritorio.php');
+    if (isset($_SESSION['recovery_pass'])){
+        header('Location: ../index.php');
     }
-include_once '../backend/login.php'
+include_once '../backend/recovery_pass.php'
 
 ?>
 <!DOCTYPE html>
@@ -13,7 +13,7 @@ include_once '../backend/login.php'
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie-edge">
-    <title>Login</title>
+    <title>Recuperar contraseña|DocMe</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/login.css">
@@ -29,24 +29,18 @@ include_once '../backend/login.php'
                 echo '<div style="color:#FF0000;text-align:left;font-size:20px;">'.$errMsg.'</div>';  
             }
         ?>
-            <h3>Bienvenido a DocMe</h3>
+            <h3>Recuperar contraseña</h3>
 
       
 
     <div class="input-div nit">
         <div class="div">
-             <input type="text"  name="user_name" value="<?php if(isset($_POST['user_name'])) echo $_POST['user_name'] ?>" autocomplete="off" placeholder="Usuario">
-        </div>
-    </div>
-
-    <div class="input-div pass mb-5">
-        <div class="div">
-            <input  type="password" required="true" name="pass" value="<?php if(isset($_POST['password'])) echo $_POST['password'] ?>" placeholder="Contraseña" >
+             <input type="text"  name="email" value="<?php if(isset($_POST['email'])) echo $_POST['email'] ?>" autocomplete="off" placeholder="Correo">
         </div>
     </div>
     
-    <button class="btn" name='login' type="submit"> Iniciar sesion</button> 
-    <a class="link" href="../frontend/recovery_pass.php">¿Olvidaste tu contraseña?</a>
+    <button class="btn mb-4" name='recovery' type="submit"> Enviar Correo</button> 
+    <span>¿Ya tienes cuenta? <a class="link" href="../index.php"> Inicia Sesión</a></span>
     <span>¿No tienes cuenta?<a class="signUp" href="../frontend/signup.php"> Registrate aquí</a></span>
     </form>
 

@@ -1,6 +1,7 @@
 <?php 
+error_reporting(0); //poner slash para quitar logs/errores de consola
 session_start();
-    if (isset($_SESSION['identificacion'])){
+    if (isset($_SESSION['signup'])){
         header('Location: ../frontend/signup.php');
     }
 include_once '../backend/signup.php'
@@ -109,12 +110,12 @@ include_once '../backend/signup.php'
 
     
 
-    <div class="btn-signup">
+    <div class="btn-signup mb-4">
     <button class="btn" name='signup' type="submit">Registrarse</button> 
     </div>
     
-    <a class="recovery-pass" href="#">¿Olvidaste tu contraseña?</a>
-    <span>¿Ya tienes cuenta? <a class="signUp" href="../index.php"> Inicia Sesión</a></span>
+    <a class="link" href="../frontend/recovery_pass.php">¿Olvidaste tu contraseña?</a>
+    <span>¿Ya tienes cuenta? <a class="link" href="../index.php"> Inicia Sesión</a></span>
     </form>
 
      <div id="msg_error" class="alert alert-danger" role="alert" style="display: none"></div>
