@@ -26,7 +26,7 @@ include_once '../backend/recovery_pass.php'
             <form autocomplete="off" method="POST"  role="form">
             <?php
             if(isset($errMsg)){
-                echo '<div style="color:#FF0000;text-align:left;font-size:20px;">'.$errMsg.'</div>';  
+                echo '<div style="color:#FF0000;text-align:center;font-size:20px;">'.$errMsg.'</div>';  
             }
         ?>
             <h3>Recuperar contraseña</h3>
