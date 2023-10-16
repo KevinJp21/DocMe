@@ -57,7 +57,7 @@ if (isset($_POST['recovery'])) {
             // Generamos un token de recuperación de contraseña aleatorio.
             $token = md5(uniqid());
             // Guardamos el token en la sesión.
-            $_SESSION['password_reset_token'] = $token; 
+            $_SESSION['password_reset_token'] = $token;
 
             // Guardamos el token en la base de datos.
             $sql = 'UPDATE usuarios SET password_reset_token = :token WHERE correo = :email';
@@ -65,13 +65,18 @@ if (isset($_POST['recovery'])) {
             $stmt->bindParam(':token', $token);
             $stmt->bindParam(':email', $email);
             $stmt->execute();
-            
+
             $user_name = $user['user'];
-            
+
             // Enviamos un correo electrónico al usuario con el enlace de recuperación de contraseña.
             $subject = 'Recuperación de contraseña de DocMe';
-            $body = 'Hola ' .$user_name. ', Para recuperar tu contraseña de DocMe haz clic en el siguiente enlace:' . ' http://localhost/DocMe/frontend/change_pass.php?token=' . $token 
-    .' Este enlace caducará en 24 horas. Si no has solicitado una recuperación de contraseña, ignora este correo electrónico.
+            $body =
+                'Hola ' .
+                $user_name .
+                ', Para recuperar tu contraseña de DocMe haz clic en el siguiente enlace:' .
+                ' http://localhost/DocMe/frontend/change_pass.php?token=' .
+                $token .
+                ' Este enlace caducará en 24 horas. Si no has solicitado una recuperación de contraseña, ignora este correo electrónico.
     
 Atentamente,
 El equipo de DocMe.';

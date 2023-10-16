@@ -37,7 +37,7 @@ if(isset($_POST['login'])) {
             
             
     if($_SESSION['id'] == $data['id_user']){//compara el id de la sesion con el de la base de datos, luego redirige a la pagina del login
-          header('location:../frontend/signup.php');
+          header('location: ../frontend/administrador/escritorio.php');
         }
             exit;
           }
