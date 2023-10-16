@@ -1,0 +1,255 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&family=Raleway&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 300px;
+    padding: 30px 0 0 0;
+    background-color: #176B87;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    border-right: 10px solid rgba(15, 53, 65, .8);
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 1;
+    transition: all .4s ease;
+    
+    
+}
+
+.sidebar .logo-datails{
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+} 
+
+.sidebar .home-section{
+    font-size:40px;
+    width: auto;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+} 
+
+.sidebar .home-section i{
+    font-size:40px;
+    width: 100%;
+} 
+
+.sidebar .logo-datails img{
+    height: 50px;
+    min-width: 78px;
+    line-height: 50px;
+
+}
+
+.sidebar.close .home-section i{
+    position: relative;
+    left: 10px;
+}
+
+.sidebar.close{
+    width: 70px;
+}
+
+.sidebar.close .logo-datails img{
+    display: none;
+}
+
+.sidebar.close .logo-details{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar.close .panel,
+.sidebar.close .nav-links .link_name{
+    display: none;
+}
+
+.sidebar.close .nav-links{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+.sidebar.close .profile-details .profile-content img{
+    position: relative;
+    right: 6px;
+    width: 50px;
+    height: 60px;
+}
+
+/*Profile*/
+.sidebar .profile-details{
+    display: flex;
+    align-items: center;
+    width: 90%;
+}
+
+.sidebar .profile-details .profile-content{
+    display: flex;
+    align-items: center;
+}
+
+.sidebar .profile-details img{
+    height: 70px;
+    width: 70px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin: 0 14px 0 12px;
+    padding: 10px;
+}
+
+.sidebar .profile-details .profile_name,
+.sidebar .profile-details .rol{
+
+    color: #DEDEDE;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.sidebar .profile-details .rol{
+    font-size: 15px;
+    text-align: center;
+}
+
+/*Panel de control*/
+
+.sidebar .panel{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 50px;
+    background-color: aliceblue;
+    border-radius: 10px;
+}
+
+.sidebar .nav-links{
+    height: 100%;
+    width: 100%;
+    padding: 20px 0 0 0;
+    margin: 0;
+}
+
+.sidebar .nav-links{
+    display: flex;
+    top:0;
+    flex-direction: column;
+    align-items:center;
+}
+
+.sidebar .nav-links li{
+    position: relative;
+    list-style: none;
+    transition: all 0.4s ease;
+    height: 60px;
+    cursor: pointer;
+    width: 100%;
+    
+}
+
+
+.sidebar .nav-links li svg, i{
+    color: #D1D1D1;
+    font-size: 25px;
+    height: 22px;
+    width: 20px ;
+}
+
+.sidebar .nav-links li:last-child{
+    background: #0f5268;
+}
+
+.sidebar .nav-links li a{
+    text-decoration: none;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 20px;
+    transition: all .4s ease;
+}
+
+.sidebar .nav-links a:hover{
+    background-color: #0f5268;
+}
+
+
+.sidebar .nav-links li a .link_name{
+    font-size: 18px;
+    font-weight: 400;
+    color: #DEDEDE;
+}
+
+/*Contenido de la pagina*/
+
+.sidebar .content-area{
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: calc(100% - 50px);
+    width: calc(100% - 300px);
+    background: #164757;
+    transition: all .4s ease;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+}
+
+.sidebar.close .content-area{
+    width: calc(100% - 70px);
+}
+
+.sidebar.close .content-area footer{
+    width: calc(100% - 70px);
+  }
+
+
+.content-area .greeting{
+    color: #D1D1D1;
+    padding: 20px 0 0 20px;
+}
+
+/*footer*/
+footer{
+    display: flex;
+    background-color:rgb(255, 255, 255);
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    max-height: 50px;
+    width: calc(100% - 290px);
+    min-width: 192px;
+    position: fixed;
+    bottom: 0;
+    transition: all .4s ease;
+  }
+  
+  .footer p{
+    font-size: 13px;
+    color: rgb(0, 0, 0);
+  }
+  
+  .footer{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+
