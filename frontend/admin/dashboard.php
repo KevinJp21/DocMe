@@ -1,3 +1,10 @@
+<?php 
+//error_reporting(0); //poner slash para quitar logs/errores de consola
+session_start();
+//header('Location: ../login.php');//quitar slash para cerrar sesion
+//session_destroy();//quitar slash para cerrar sesion
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 

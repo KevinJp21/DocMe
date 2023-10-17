@@ -22,7 +22,7 @@ include_once '../backend/signup.php'
 </head>
 <body>
     <div class="contenedor">
-        <img class="img-fluid logo-img" src="../img/logo-login.svg" alt="Logo DocMe">
+        <img class="img-fluid logo-img" src="../img/logo_docme.svg" alt="Logo DocMe">
         <div class="contenido-login">
             <form autocomplete="off" method="POST"  role="form" onsubmit="return validarContraseña();">
             <h3>Registro</h3>

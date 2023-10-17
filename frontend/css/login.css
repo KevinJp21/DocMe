@@ -25,7 +25,6 @@ body{
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
     line-height: 1.5;
-    overflow-x: hidden;
 }
 
 .contenedor{
@@ -35,6 +34,8 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    overflow-x: auto;
+    
 }
 
 .contenido-login{
@@ -44,13 +45,14 @@ body{
     text-align: center;
     height: 600px;
     background: #267089;
+
 }
 
 .contenido-login{
     border-color: #226479;
     border: 3px solid #226479;
     border-bottom: 8px solid #226479;
-    padding: 30px 50px;
+    padding: 30px 20px;
     border-radius: 20px;
 }
 
@@ -80,6 +82,7 @@ form{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
 }
 
 .contenido-login .input-div{
