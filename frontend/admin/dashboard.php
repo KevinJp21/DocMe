@@ -1,10 +1,10 @@
-<?php 
-//error_reporting(0); //poner slash para quitar logs/errores de consola
+<?php
 session_start();
-//header('Location: ../login.php');//quitar slash para cerrar sesion
-//session_destroy();//quitar slash para cerrar sesion
+include '../../backend/dashboard.php';
 
 ?>
+
+<?php if(isset($_SESSION['id'])) { ?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -36,7 +36,7 @@ session_start();
             </div>
 
             <div class="name-user">
-                <div class="profile_name">Kevin Julio</div>
+                <div class="profile_name"><span>Nombre</span> <span>Apellido</span></div>
                 <div class="rol">Administrador</div>
             </div>
         </div>
@@ -122,7 +122,7 @@ session_start();
                 </a>
             </li>
             <li class="mt-auto">
-                <a href="#">
+                <a href="?logout">
                     <i class='bx bx-log-out'></i>
                     <span class="link_name">Cerrar sesíon</span>
                 </a>
@@ -131,7 +131,7 @@ session_start();
 
         <div class="content-area">
             <div class="greeting">
-                <span class="fs-5">Bienvenido(a), Kevin Julio</span>
+                <span class="fs-5">Bienvenido(a), Nombre Apellido</span>
             </div>
             <div class="row">
                 <div class="col-md-4 mt-4">
@@ -191,7 +191,7 @@ session_start();
                                     <div class="info-user ml-3">
                                         <div class="flex-1 p-3 pb-0 ml-2">
                                             <h6 class="fw-bold mb-1 user-name">Miguel Ortiz</h6>
-                                            <small class="text-muted status">2023/10/08 14:45:</small>
+                                            <small class="text-muted status">2023/10/08 14:45</small>
                                         </div>
                                     </div>
 
@@ -231,3 +231,7 @@ session_start();
 </body>
 
 </html>
+
+<?php }else{
+header('Location: ../login.php');
+}?>

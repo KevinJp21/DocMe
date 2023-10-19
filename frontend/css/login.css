@@ -86,11 +86,19 @@ form{
 }
 
 .contenido-login .input-div{
-    position: relative;
     margin: 25px 0;
     padding: 5px 0;
     border-bottom: 1px solid var(--border-color);
 }
+
+.contenido-login .input-div{
+    width: 100%;
+}
+
+.input-div input{
+    width: 100%;
+}
+
 .contenido-login .input-div.dni{
     margin-top: 0;
 }
@@ -167,12 +175,14 @@ form{
 }
 /*responsive para tablets y celulares*/
 /*tablet mas pequena*/
-@media screen and (max-width: 1000px){
-    form{
-        width: 290px;
+@media screen and (max-width: 500px){
+    .contenido-login, .contenido-login form{
+        width: 100%;
     }
+
     .contenido-login h3{
-        font-size: 1.5rem;
-        margin: 8px 0;
+        width: 100%;
+        font-size: 25px;
     }
+
 }

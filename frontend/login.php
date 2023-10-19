@@ -4,6 +4,7 @@ session_start();
     if (isset($_SESSION['id'])){
         header('Location: ../frontend/admin/dashboard.php');
     }
+    
 include_once '../backend/login.php'
 
 ?>

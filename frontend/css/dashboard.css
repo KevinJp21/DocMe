@@ -12,13 +12,13 @@
     left: 0;
     height: 100%;
     width: 300px;
-    padding: 30px 0 0 0;
+    padding: 20px 0 0 0;
     background-color: #176B87;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 50px;
+    gap:20px;
     border-right: 10px solid rgba(15, 53, 65, .8);
     overflow-y: auto;
     overflow-x: hidden;
@@ -26,6 +26,12 @@
     transition: all .4s ease;
     
     
+}
+
+@media screen and (max-height:600px){
+    .sidebar{
+        padding: 80px 0 0 0;
+    }
 }
 
 .sidebar .logo-datails{
@@ -53,8 +59,6 @@
 .sidebar .logo-datails img{
     height: 50px;
     min-width: 78px;
-    line-height: 50px;
-
 }
 
 .sidebar.close .home-section i{
@@ -119,12 +123,14 @@
 .sidebar .profile-details .rol{
 
     color: #DEDEDE;
-    font-size: 25px;
+    font-size: 18px;
     font-weight: 500;
+    width: 100%;
+    text-align: center;
 }
 
 .sidebar .profile-details .rol{
-    font-size: 15px;
+    font-size: 13px;
     text-align: center;
 }
 
@@ -229,6 +235,8 @@
 
 /*footer*/
 footer{
+    position: absolute;
+    bottom: 0;
     display: flex;
     background-color:rgb(255, 255, 255);
     justify-content: center;
