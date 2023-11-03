@@ -21,7 +21,7 @@ include_once '../backend/change_pass.php';
     <link rel="icon" href="../img/logo-login.svg">
 <body>
     <div class="contenedor">
-        <img class="img-fluid logo-img" src="../img/logo-login.svg" alt="Logo DocMe">
+        <img class="img-fluid logo-img" src="../img/logo_docme.svg" alt="Logo DocMe">
         <div class="contenido-login">
             <form autocomplete="off" method="POST"  role="form">
             <?php

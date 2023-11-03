@@ -96,7 +96,6 @@ form{
     position: relative;
     margin: 25px 0;
     padding: 5px 0;
-    width: 90%;
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -109,6 +108,7 @@ form{
     padding: 0.5rem 0.7rem;
     font-size: 1.2rem;
     color: var(--text-white);
+    width: 100%;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -119,10 +119,6 @@ form{
     flex-wrap: wrap;
     gap: 20px;
     
-}
-
-.safe{
-    width: 20px;
 }
 
 .recovery-pass{
@@ -184,14 +180,43 @@ form{
         font-size: 1.5rem;
         margin: 8px 0;
     }
+
+    .btn{
+        width: 80%;
+    }
 }
 
 @media screen and (max-width: 767px) {
     .contenido-login{
         height: 1200px;
+        width: 450px;
     }
 
     form{
-        width: 250px;
+        width: 100%;
+    }
+
+    .btn{
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .contenido-login{
+        height: 1200px;
+        width: 100%;
+    }
+
+    h3{
+        font-size: 2px;
+
+    }
+
+    form{
+        width: 100%;
+    }
+
+    .btn{
+        width: 100%;
     }
 }

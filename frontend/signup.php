@@ -1,5 +1,5 @@
 <?php 
-//error_reporting(0); //poner slash para quitar logs/errores de consola
+error_reporting(0); //poner slash para quitar logs/errores de consola
 session_start();
     if (isset($_SESSION['signup'])){
         header('Location: ../frontend/signup.php');

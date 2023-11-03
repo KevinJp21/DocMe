@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-10-2023 a las 00:24:40
+-- Tiempo de generación: 03-11-2023 a las 01:12:43
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -40,6 +40,14 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id_user`, `nombre`, `apellido`, `identificacion`, `correo`, `password`, `user`, `tel`, `password_reset_token`) VALUES
+(30, 'Kevin', 'Julio', '104214214', 'kevinjp821@gmail.com', 'kevin12', 'KevinJp21', '3019421451', ''),
+(31, 'Pedro', 'miguel', '124214214', 'pedro@gmail.com', 'pedro12', 'pedro12', '401242145', NULL);
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -59,7 +67,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_user` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_user` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
