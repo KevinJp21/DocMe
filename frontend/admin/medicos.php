@@ -1,11 +1,46 @@
 <?php 
 session_start();
-include '../../backend/config.php';
+include '../../backend/admin/dashboard.php';
+include '../../backend/admin/medicos.php';
 if(isset($_SESSION['id'])) { 
     $userData = getUserData($_SESSION['id']);
     $name = $userData['nombre'];
     $last_name = $userData['apellido'];
     $user_name = $userData['user'];
+
+    
+    $txtName = (isset($_POST['txtName']))?$_POST['txtName']:"";
+    $txtLastName = (isset($_POST['txtLastName']))?$_POST['txtLastName']:"";
+    $txtId = (isset($_POST['txtId']))?$_POST['txtId']:"";
+    $txtEmail = (isset($_POST['txtEmail']))?$_POST['txtEmail']:"";
+    $txtPass = (isset($_POST['txtPass']))?$_POST['txtPass']:"";
+    $txtUser = (isset($_POST['txtUser']))?$_POST['txtUser']:"";
+    $txtCel = (isset($_POST['txtCel']))?$_POST['txtCel']:"";
+
+    $accion = (isset($_POST['accion']))?$_POST['accion']:"";
+
+    switch ($accion) {
+        case 'btnAdd':
+            $stmt = $connect->prepare("INSERT INTO usuarios(nombre, apellido, identificacion, correo, password, user, tel) VALUES (:nombre, :apellido, :identificacion, :correo, :pass, :user, :tel)");
+
+            $stmt->bindParam(":nombre", $txtName);
+            $stmt->bindParam(":apellido", $txtLastName);
+            $stmt->bindParam(":identificacion", $txtId);
+            $stmt->bindParam(":correo", $txtEmail);
+            $stmt->bindParam(":pass", $txtPass);
+            $stmt->bindParam(":user", $txtUser);
+            $stmt->bindParam(":tel", $txtCel);
+            $stmt->execute();
+            break;
+        
+        default:
+            # code...
+            break;
+    }
+
+    $stmt = $connect->prepare("SELECT * FROM usuarios WHERE 1");
+    $stmt->execute();
+    $listMed = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <head>
@@ -19,8 +54,6 @@ if(isset($_SESSION['id'])) {
 </head>
 
 <body>
-
-
     <div class="sidebar">
         <div class="logo-datails">
             <img src="../../img/logo_docme.png" alt="">
@@ -43,9 +76,9 @@ if(isset($_SESSION['id'])) {
 
         <ul class="nav-links">
             <a class="panel" href="../admin/dashboard.php">
-            <div >
-                <span>Panel de control</span>
-            </div>
+                <div>
+                    <span>Panel de control</span>
+                </div>
             </a>
             <li class="mt-4">
                 <a href="../admin/citas.php">
@@ -77,7 +110,7 @@ if(isset($_SESSION['id'])) {
             </li>
 
             <li>
-                <a href="../admin/medicos.php">
+                <a href="">
                     <svg xmlns="http://www.w3.org/2000/svg" style="fill:#DEDEDE" viewBox="0 0 448 512">
                         <path
                             d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-96 55.2C54 332.9 0 401.3 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7c0-81-54-149.4-128-171.1V362c27.6 7.1 48 32.2 48 62v40c0 8.8-7.2 16-16 16H336c-8.8 0-16-7.2-16-16s7.2-16 16-16V424c0-17.7-14.3-32-32-32s-32 14.3-32 32v24c8.8 0 16 7.2 16 16s-7.2 16-16 16H256c-8.8 0-16-7.2-16-16V424c0-29.8 20.4-54.9 48-62V304.9c-6-.6-12.1-.9-18.3-.9H178.3c-6.2 0-12.3 .3-18.3 .9v65.4c23.1 6.9 40 28.3 40 53.7c0 30.9-25.1 56-56 56s-56-25.1-56-56c0-25.4 16.9-46.8 40-53.7V311.2zM144 448a24 24 0 1 0 0-48 24 24 0 1 0 0 48z" />
@@ -132,75 +165,89 @@ if(isset($_SESSION['id'])) {
         </ul>
 
         <div class="content-area">
-            <div class="greeting">
-                <span class="fs-5">Bienvenido(a), <?php echo $user_name; ?></span>
-            </div>
-            <div class="row">
-                <div class="col-md-4 mt-4">
-                    <div class="card">
-                        <div class="card-body pb-0">
-                            <h2 class="mb-2">0</h2>
-                            <p>Citas</p>
+            <div class="container-fluid row">
 
-                        </div>
+                <form class="col-4 p-3" method="post">
+                    <h3 class="text-center">Registrar Medicos</h3>
+                    <?php
+                    if (isset($errMsg)) {
+                        echo '<div style="color:#FF0000;text-align:center;font-size:20px;">' . $errMsg . '</div>';
+                    }
+                    ?>
+                    <div class="mb-3">
+                        <label for="examplnameeInputEmail1" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" name="txtName" value="<?php if(isset($_POST['txtName'])) echo $_POST['txtName'] ?>">
                     </div>
-                </div>
-                <div class="col-md-4 mt-4">
-                    <div class="card">
-                        <div class="card-body pb-0">
-                            <h2 class="mb-2">0</h2>
-                            <p>Pacientes</p>
 
-                        </div>
+                    <div class="mb-3">
+                        <label for="lastname" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" name="txtLastName" value="<?php if(isset($_POST['txtLastName'])) echo $_POST['txtLastName'] ?>">
                     </div>
-                </div>
-                <div class="col-md-4 mt-4">
-                    <div class="card">
-                        <div class="card-body pb-0">
-                            <h2 class="mb-2">0</h2>
-                            <p>Médicos</p>
 
-                        </div>
+                    <div class="mb-3">
+                        <label for="id" class="form-label">Identificacion</label>
+                        <input type="text" class="form-control" name="txtId" value="<?php if(isset($_POST['txtId'])) echo $_POST['txtId'] ?>">
                     </div>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-6 mt-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">ultimos pacientes</div>
-                        </div>
-                        <div class="card-body pb-0">
-                            <div class="d-flex">
-
-                                <div class="flex-1 pt-1 ml-2">
-                                    <h6 class="fw-bold mb-1">1042421512</h6>
-                                    <small class="text-muted">Miguel Ortíz</small>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Correo</label>
+                        <input type="email" class="form-control" name="txtEmail" value="<?php if(isset($_POST['txtEmail'])) echo $_POST['txtEmail'] ?>">
                     </div>
-                </div>
-                <div class="col-md-6 mt-4">
-                    <div class="card">
-                        <div class="card-body p-0">
-                            <div class="card-header">
-                                <div class="card-title">ultimas citas</div>
-                            </div>
-                            <div class="card-list">
-                                <div class="item-list">
-                                    <div class="info-user ml-3">
-                                        <div class="flex-1 p-3 pb-0 ml-2">
-                                            <h6 class="fw-bold mb-1 user-name">Miguel Ortiz</h6>
-                                            <small class="text-muted status">2023/10/08 14:45</small>
-                                        </div>
-                                    </div>
 
-                                </div>
-                            </div>
-                        </div>
+                    <div class="mb-3">
+                        <label for="Pass" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" name="txtPass" value="<?php if(isset($_POST['txtPass'])) echo $_POST['txtPass'] ?>">
                     </div>
+
+                    <div class="mb-3">
+                        <label for="User" class="form-label">Nombre de usuario</label>
+                        <input type="text" class="form-control" name="txtUser" value="<?php if(isset($_POST['txtUser'])) echo $_POST['txtUser'] ?>">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="Tel" class="form-label">Telefono</label>
+                        <input type="text" class="form-control" name="txtCel" value="<?php if(isset($_POST['txtCel'])) echo $_POST['txtCel'] ?>">
+                    </div>
+
+                    <button value="btnAdd" type="submit" class="btn btn-primary" name="btnAdd">Registrar</button>
+                </form>
+
+                <div class="col-8 p-4">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th>
+                                <th scope="col">Identificacion</th>
+                                <th scope="col">Correo</th>
+                                <th scope="col">usuario</th>
+                                <th scope="col">Telefono</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                        $i = 0;
+                        foreach ($listMed as $medico) {?>
+                            <tr>
+                                <th scope="row"><?php echo $i = $i + 1; ?></th>
+                                <td><?php echo $medico['id_user']; ?></td>
+                                <td><?php echo $medico['nombre']; ?></td>
+                                <td><?php echo $medico['apellido']; ?></td>
+                                <td><?php echo $medico['identificacion']; ?></td>
+                                <td><?php echo $medico['correo']; ?></td>
+                                <td><?php echo $medico['user']; ?></td>
+                                <td><?php echo $medico['tel']; ?></td>
+                                <td>
+                                    <a href=""><i class="fa-solid fa-trash-can"></i></a>
+                                    <a href=""><i class="fa-solid fa-pen-to-square"></i></a>
+                                </td>
+                            </tr>
+                            <?php }?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <footer id="footer" class="mt-5">

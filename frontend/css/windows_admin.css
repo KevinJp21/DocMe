@@ -138,12 +138,20 @@
 
 .sidebar .panel{
     display: flex;
+    text-decoration: none;
     justify-content: center;
     align-items: center;
     width: 80%;
     height: 50px;
+    color:#0f5268;
     background-color: aliceblue;
     border-radius: 10px;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+}
+
+.sidebar .panel:hover{
+    background-color: #ffffff !important;
 }
 
 .sidebar .nav-links{

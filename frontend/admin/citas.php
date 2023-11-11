@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include '../../backend/config.php';
+require '../../backend/dashboard.php';
 if(isset($_SESSION['id'])) { 
     $userData = getUserData($_SESSION['id']);
     $name = $userData['nombre'];
@@ -48,7 +48,7 @@ if(isset($_SESSION['id'])) {
             </div>
             </a>
             <li class="mt-4">
-                <a href="../admin/citas.php">
+                <a href="">
                     <svg width="30" height="32" viewBox="0 0 30 32" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -132,77 +132,7 @@ if(isset($_SESSION['id'])) {
         </ul>
 
         <div class="content-area">
-            <div class="greeting">
-                <span class="fs-5">Bienvenido(a), <?php echo $user_name; ?></span>
-            </div>
-            <div class="row">
-                <div class="col-md-4 mt-4">
-                    <div class="card">
-                        <div class="card-body pb-0">
-                            <h2 class="mb-2">0</h2>
-                            <p>Citas</p>
 
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mt-4">
-                    <div class="card">
-                        <div class="card-body pb-0">
-                            <h2 class="mb-2">0</h2>
-                            <p>Pacientes</p>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mt-4">
-                    <div class="card">
-                        <div class="card-body pb-0">
-                            <h2 class="mb-2">0</h2>
-                            <p>Médicos</p>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6 mt-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">ultimos pacientes</div>
-                        </div>
-                        <div class="card-body pb-0">
-                            <div class="d-flex">
-
-                                <div class="flex-1 pt-1 ml-2">
-                                    <h6 class="fw-bold mb-1">1042421512</h6>
-                                    <small class="text-muted">Miguel Ortíz</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 mt-4">
-                    <div class="card">
-                        <div class="card-body p-0">
-                            <div class="card-header">
-                                <div class="card-title">ultimas citas</div>
-                            </div>
-                            <div class="card-list">
-                                <div class="item-list">
-                                    <div class="info-user ml-3">
-                                        <div class="flex-1 p-3 pb-0 ml-2">
-                                            <h6 class="fw-bold mb-1 user-name">Miguel Ortiz</h6>
-                                            <small class="text-muted status">2023/10/08 14:45</small>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <footer id="footer" class="mt-5">
                 <div class="footer">
                     <p class="m-0">&copy; Copyright 2023 - Todos los derechos reservados | DocMe </p>
