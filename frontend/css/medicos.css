@@ -17,3 +17,7 @@
 .btn-add:hover{
     background-color: #ffff;
 }
+
+.container-fluid{
+    overflow-x: visible;
+}
