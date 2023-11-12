@@ -69,10 +69,8 @@ if (isset($_POST['btnAdd'])) {
                 $stmt->execute();
 
                 function clear_form_cache() {
-                    // Get all the form fields
                     $fields = array_keys($_POST);//Limpiar los campos del formulario de registro
                 
-                    // Loop through the fields and clear them
                     foreach ($fields as $field) {
                         unset($_POST[$field]);
                     }

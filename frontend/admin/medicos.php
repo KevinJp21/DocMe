@@ -2,41 +2,12 @@
 session_start();
 include '../../backend/admin/dashboard.php';
 include '../../backend/admin/medicos.php';
+
 if(isset($_SESSION['id'])) { 
     $userData = getUserData($_SESSION['id']);
     $name = $userData['nombre'];
     $last_name = $userData['apellido'];
     $user_name = $userData['user'];
-
-    
-    $txtName = (isset($_POST['txtName']))?$_POST['txtName']:"";
-    $txtLastName = (isset($_POST['txtLastName']))?$_POST['txtLastName']:"";
-    $txtId = (isset($_POST['txtId']))?$_POST['txtId']:"";
-    $txtEmail = (isset($_POST['txtEmail']))?$_POST['txtEmail']:"";
-    $txtPass = (isset($_POST['txtPass']))?$_POST['txtPass']:"";
-    $txtUser = (isset($_POST['txtUser']))?$_POST['txtUser']:"";
-    $txtCel = (isset($_POST['txtCel']))?$_POST['txtCel']:"";
-
-    $accion = (isset($_POST['accion']))?$_POST['accion']:"";
-
-    switch ($accion) {
-        case 'btnAdd':
-            $stmt = $connect->prepare("INSERT INTO usuarios(nombre, apellido, identificacion, correo, password, user, tel) VALUES (:nombre, :apellido, :identificacion, :correo, :pass, :user, :tel)");
-
-            $stmt->bindParam(":nombre", $txtName);
-            $stmt->bindParam(":apellido", $txtLastName);
-            $stmt->bindParam(":identificacion", $txtId);
-            $stmt->bindParam(":correo", $txtEmail);
-            $stmt->bindParam(":pass", $txtPass);
-            $stmt->bindParam(":user", $txtUser);
-            $stmt->bindParam(":tel", $txtCel);
-            $stmt->execute();
-            break;
-        
-        default:
-            # code...
-            break;
-    }
 
     $stmt = $connect->prepare("SELECT * FROM usuarios WHERE 1");
     $stmt->execute();
@@ -176,37 +147,51 @@ if(isset($_SESSION['id'])) {
                     ?>
                     <div class="mb-3">
                         <label for="examplnameeInputEmail1" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" name="txtName" value="<?php if(isset($_POST['txtName'])) echo $_POST['txtName'] ?>">
+                        <input type="text" class="form-control" name="txtName" value="<?php if (isset($_POST['txtName'])) {
+                            echo $_POST['txtName'];
+                        } ?>">
                     </div>
 
                     <div class="mb-3">
                         <label for="lastname" class="form-label">Apellido</label>
-                        <input type="text" class="form-control" name="txtLastName" value="<?php if(isset($_POST['txtLastName'])) echo $_POST['txtLastName'] ?>">
+                        <input type="text" class="form-control" name="txtLastName" value="<?php if (isset($_POST['txtLastName'])) {
+                            echo $_POST['txtLastName'];
+                        } ?>">
                     </div>
 
                     <div class="mb-3">
                         <label for="id" class="form-label">Identificacion</label>
-                        <input type="text" class="form-control" name="txtId" value="<?php if(isset($_POST['txtId'])) echo $_POST['txtId'] ?>">
+                        <input type="text" class="form-control" name="txtId" value="<?php if (isset($_POST['txtId'])) {
+                            echo $_POST['txtId'];
+                        } ?>">
                     </div>
 
                     <div class="mb-3">
                         <label for="email" class="form-label">Correo</label>
-                        <input type="email" class="form-control" name="txtEmail" value="<?php if(isset($_POST['txtEmail'])) echo $_POST['txtEmail'] ?>">
+                        <input type="email" class="form-control" name="txtEmail" value="<?php if (isset($_POST['txtEmail'])) {
+                            echo $_POST['txtEmail'];
+                        } ?>">
                     </div>
 
                     <div class="mb-3">
                         <label for="Pass" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" name="txtPass" value="<?php if(isset($_POST['txtPass'])) echo $_POST['txtPass'] ?>">
+                        <input type="password" class="form-control" name="txtPass" value="<?php if (isset($_POST['txtPass'])) {
+                            echo $_POST['txtPass'];
+                        } ?>">
                     </div>
 
                     <div class="mb-3">
                         <label for="User" class="form-label">Nombre de usuario</label>
-                        <input type="text" class="form-control" name="txtUser" value="<?php if(isset($_POST['txtUser'])) echo $_POST['txtUser'] ?>">
+                        <input type="text" class="form-control" name="txtUser" value="<?php if (isset($_POST['txtUser'])) {
+                            echo $_POST['txtUser'];
+                        } ?>">
                     </div>
 
                     <div class="mb-3">
                         <label for="Tel" class="form-label">Telefono</label>
-                        <input type="text" class="form-control" name="txtCel" value="<?php if(isset($_POST['txtCel'])) echo $_POST['txtCel'] ?>">
+                        <input type="text" class="form-control" name="txtCel" value="<?php if (isset($_POST['txtCel'])) {
+                            echo $_POST['txtCel'];
+                        } ?>">
                     </div>
 
                     <button value="btnAdd" type="submit" class="btn btn-primary" name="btnAdd">Registrar</button>
@@ -241,8 +226,10 @@ if(isset($_SESSION['id'])) {
                                 <td><?php echo $medico['user']; ?></td>
                                 <td><?php echo $medico['tel']; ?></td>
                                 <td>
-                                    <a href=""><i class="fa-solid fa-trash-can"></i></a>
-                                    <a href=""><i class="fa-solid fa-pen-to-square"></i></a>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteMed<?php echo $medico['id_user']; ?>"><i class="fa-solid fa-trash-can"></i></button>
+                                    <button type="submit" data-bs-toggle="modal" class="btn btn-primary"
+                                        data-target="#editMed<?php echo $medico['id_user']; ?>"><i
+                                            class="fa-solid fa-pen-to-square" name="btnEdit" value="btnEdit"></i></button>
                                 </td>
                             </tr>
                             <?php }?>
