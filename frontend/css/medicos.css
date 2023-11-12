@@ -1,6 +1,6 @@
 .btn-add-container{
     display: flex;
-    justify-content: end;
+    justify-content: start;
     align-items: center;
 }
 
@@ -14,12 +14,42 @@
     transition: .3s ease-in-out;
 }
 
+
 .btn-add:hover{
     background-color: #ffff;
 }
 
+.btn-edit{
+    width: 45px;
+    height: 35px;
+    transition: .2s ease-in-out;
+    padding: 0;
+}
+
+.btn-edit i{
+    font-size: 20px;
+    color: #0f5268;
+    transition: .2s ease-in-out;
+}
+
+.btn-edit:hover, .btn-edit i:hover{
+    color: aliceblue;
+    background-color: #164757;
+}
+
+
 .container-fluid{
     overflow-x: auto;
+}
+
+.container-fluid::-webkit-scrollbar{
+    width: 2px;
+}
+
+.container-fluid::-webkit-scrollbar-thumb{
+    background: aliceblue;
+    border-radius: 10px;
+    width: 2px;
 }
 
 table{
@@ -27,6 +57,10 @@ table{
     width: 100%;
     border-collapse: collapse;
     border-radius: 10px;
+}
+
+th a{
+    text-align: center;
 }
 
 th, td{
@@ -49,6 +83,9 @@ thead{
     background-color: aliceblue;
     border-style: none;
     border-radius: 10px;
+    width: 200px;
+    height: 40px;
+    padding: 6;
     
 }
 

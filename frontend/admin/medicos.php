@@ -140,7 +140,7 @@ if(isset($_SESSION['id'])) {
 
         <div class="content-area">
             <div class="container-fluid row">
-                <div class="btn-add-container col-12 pe-4 pt-4">
+                <div class="btn-add-container col-12 ps-4 pt-4">
                     <button type="button" data-bs-toggle="modal" data-bs-target="#addMed" class="btn-add">Agregar médico</button>
                     <?php include('../../backend/admin/addMed.php')?>
                 </div>
@@ -148,7 +148,7 @@ if(isset($_SESSION['id'])) {
                     <table class="table-striped" id="table">
                         <thead>
                             <tr>
-                                <th></th>
+                                <th>#</th>
                                 <th scope="col">ID</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Apellido</th>
@@ -156,7 +156,7 @@ if(isset($_SESSION['id'])) {
                                 <th scope="col">Correo</th>
                                 <th scope="col">usuario</th>
                                 <th scope="col">Teléfono</th>
-                                <th></th>
+                                <th>Editar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -173,7 +173,7 @@ if(isset($_SESSION['id'])) {
                                 <td><?php echo $medico['user']; ?></td>
                                 <td><?php echo $medico['tel']; ?></td>
                                 <td>
-                                    <button type="button" data-bs-toggle="modal" class="btn btn-primary" data-bs-target="#editMed<?php echo $medico['id_user']; ?>"><i class="fa-solid fa-pen-to-square" name="btnEdit" value="btnEdit"></i></button>
+                                    <button type="button" data-bs-toggle="modal" class="btn btn-edit" data-bs-target="#editMed<?php echo $medico['id_user']; ?>"><i class="fa-solid fa-pen-to-square" name="btnEdit" value="btnEdit"></i></button>
                                 </td>
                             </tr>
                             <?php include '../../backend/admin/editMed.php'; ?>
