@@ -49,13 +49,13 @@
                                 value="" require="">
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-6 mb-3">
                             <label for="userName" class="form-label">Usuario</label>
                             <input type="text" id="userName" name="userName" class="form-control"
                                 value="" require="">
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-6 mb-3">
                             <label for="tel" class="form-label">Teléfono</label>
                             <input type="text" id="tel" name="tel" class="form-control"
                                 value="" require="">
