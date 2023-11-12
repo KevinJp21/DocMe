@@ -1,0 +1,19 @@
+.btn-add-container{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.btn-add{
+    background-color: aliceblue;
+    color: #0f5268;
+    height: 40px;
+    width: 200px;
+    border-radius: 10px;
+    border-style: none;
+    transition: .3s ease-in-out;
+}
+
+.btn-add:hover{
+    background-color: #ffff;
+}

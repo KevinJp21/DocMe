@@ -22,6 +22,7 @@ if(isset($_SESSION['id'])) {
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../../frontend/css/windows_admin.css">
+    <link rel="stylesheet" href="../css/medicos.css">
 </head>
 
 <body>
@@ -137,67 +138,11 @@ if(isset($_SESSION['id'])) {
 
         <div class="content-area">
             <div class="container-fluid row">
-
-                <form class="col-4 p-3" method="post">
-                    <h3 class="text-center">Registrar Medicos</h3>
-                    <?php
-                    if (isset($errMsg)) {
-                        echo '<div style="color:#FF0000;text-align:center;font-size:20px;">' . $errMsg . '</div>';
-                    }
-                    ?>
-                    <div class="mb-3">
-                        <label for="examplnameeInputEmail1" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" name="txtName" value="<?php if (isset($_POST['txtName'])) {
-                            echo $_POST['txtName'];
-                        } ?>">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="lastname" class="form-label">Apellido</label>
-                        <input type="text" class="form-control" name="txtLastName" value="<?php if (isset($_POST['txtLastName'])) {
-                            echo $_POST['txtLastName'];
-                        } ?>">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="id" class="form-label">Identificacion</label>
-                        <input type="text" class="form-control" name="txtId" value="<?php if (isset($_POST['txtId'])) {
-                            echo $_POST['txtId'];
-                        } ?>">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Correo</label>
-                        <input type="email" class="form-control" name="txtEmail" value="<?php if (isset($_POST['txtEmail'])) {
-                            echo $_POST['txtEmail'];
-                        } ?>">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="Pass" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" name="txtPass" value="<?php if (isset($_POST['txtPass'])) {
-                            echo $_POST['txtPass'];
-                        } ?>">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="User" class="form-label">Nombre de usuario</label>
-                        <input type="text" class="form-control" name="txtUser" value="<?php if (isset($_POST['txtUser'])) {
-                            echo $_POST['txtUser'];
-                        } ?>">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="Tel" class="form-label">Telefono</label>
-                        <input type="text" class="form-control" name="txtCel" value="<?php if (isset($_POST['txtCel'])) {
-                            echo $_POST['txtCel'];
-                        } ?>">
-                    </div>
-
-                    <button value="btnAdd" type="submit" class="btn btn-primary" name="btnAdd">Registrar</button>
-                </form>
-
-                <div class="col-8 p-4">
+                <div class="btn-add-container col-12 pe-4 pt-4">
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#addMed" class="btn-add">Agregar médico</button>
+                    
+                </div>
+                <div class="col-12 p-4">
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -205,10 +150,10 @@ if(isset($_SESSION['id'])) {
                                 <th scope="col">ID</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Apellido</th>
-                                <th scope="col">Identificacion</th>
+                                <th scope="col">Identificación</th>
                                 <th scope="col">Correo</th>
                                 <th scope="col">usuario</th>
-                                <th scope="col">Telefono</th>
+                                <th scope="col">Teléfono</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -226,12 +171,10 @@ if(isset($_SESSION['id'])) {
                                 <td><?php echo $medico['user']; ?></td>
                                 <td><?php echo $medico['tel']; ?></td>
                                 <td>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteMed<?php echo $medico['id_user']; ?>"><i class="fa-solid fa-trash-can"></i></button>
-                                    <button type="submit" data-bs-toggle="modal" class="btn btn-primary"
-                                        data-target="#editMed<?php echo $medico['id_user']; ?>"><i
-                                            class="fa-solid fa-pen-to-square" name="btnEdit" value="btnEdit"></i></button>
+                                    <button type="button" data-bs-toggle="modal" class="btn btn-primary" data-bs-target="#editMed<?php echo $medico['id_user']; ?>"><i class="fa-solid fa-pen-to-square" name="btnEdit" value="btnEdit"></i></button>
                                 </td>
                             </tr>
+                            <?php include '../../backend/admin/editMed.php'; ?>
                             <?php }?>
                         </tbody>
                     </table>
@@ -257,6 +200,7 @@ if(isset($_SESSION['id'])) {
             sidebar.classList.toggle("close");
         });
     </script>
+    <script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
     <script src="https://kit.fontawesome.com/ab205d1cfa.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">

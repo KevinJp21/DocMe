@@ -1,6 +1,7 @@
 <?php 
 session_start();
 include '../../backend/config.php';
+include '../../backend/admin/dashboard.php';
 if(isset($_SESSION['id'])) { 
     $userData = getUserData($_SESSION['id']);
     $name = $userData['nombre'];
