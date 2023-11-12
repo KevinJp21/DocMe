@@ -34,10 +34,6 @@ if(isset($_SESSION['id'])) {
         <?php include('../tamplates/sideBar.php')?>
         <div class="content-area">
             <div class="container-fluid row">
-                <div class="btn-add-container col-12 ps-4 pt-4">
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#addMed" class="btn-add">Agregar médico</button>
-                    <?php include('../../backend/admin/addMed.php')?>
-                </div>
                 <div class="col-12 p-4">
                     <table class="table-striped" id="table">
                         <thead>
@@ -56,21 +52,21 @@ if(isset($_SESSION['id'])) {
                         <tbody>
                             <?php 
                         $i = 0;
-                        foreach ($listMed as $medico) {?>
+                        foreach ($listMed as $paciente) {?>
                             <tr>
                                 <th scope="row"><?php echo $i = $i + 1; ?></th>
-                                <td><?php echo $medico['id_user']; ?></td>
-                                <td><?php echo $medico['nombre']; ?></td>
-                                <td><?php echo $medico['apellido']; ?></td>
-                                <td><?php echo $medico['identificacion']; ?></td>
-                                <td><?php echo $medico['correo']; ?></td>
-                                <td><?php echo $medico['user']; ?></td>
-                                <td><?php echo $medico['tel']; ?></td>
+                                <td><?php echo $paciente['id_user']; ?></td>
+                                <td><?php echo $paciente['nombre']; ?></td>
+                                <td><?php echo $paciente['apellido']; ?></td>
+                                <td><?php echo $paciente['identificacion']; ?></td>
+                                <td><?php echo $paciente['correo']; ?></td>
+                                <td><?php echo $paciente['user']; ?></td>
+                                <td><?php echo $paciente['tel']; ?></td>
                                 <td>
-                                    <button type="button" data-bs-toggle="modal" class="btn btn-edit" data-bs-target="#editMed<?php echo $medico['id_user']; ?>"><i class="fa-solid fa-pen-to-square" name="btnEdit" value="btnEdit"></i></button>
+                                    <button type="button" data-bs-toggle="modal" class="btn btn-edit" data-bs-target="#editPac<?php echo $paciente['id_user']; ?>"><i class="fa-solid fa-pen-to-square" name="btnEdit" value="btnEdit"></i></button>
                                 </td>
                             </tr>
-                            <?php include '../../backend/admin/editMed.php'; ?>
+                            <?php include '../../backend/admin/editPaciente.php'; ?>
                             <?php }?>
                         </tbody>
                     </table>

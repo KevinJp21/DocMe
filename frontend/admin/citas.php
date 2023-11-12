@@ -2,6 +2,7 @@
 session_start();
 require '../../backend/admin/dashboard.php';
 require '../../backend/config.php';
+require '../../backend/getUserData.php';
 if(isset($_SESSION['id'])) { 
     $userData = getUserData($_SESSION['id']);
     $name = $userData['nombre'];

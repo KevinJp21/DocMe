@@ -113,3 +113,8 @@ thead{
     color: #164757;
     border-radius: 5px;
 }
+
+.modal-backdrop.fade {
+    width: 0% !important;
+    height: 0% !important;
+}
