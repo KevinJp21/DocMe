@@ -4,11 +4,53 @@ if (isset($_POST['accion'])) {
         case 'edit':
             edit();
             break;
+        case 'add';
+            add();
+            break;
     }
 }
 
-function edit()
-{
+function add(){
+    extract($_POST);
+    require_once '../config.php';
+    $stmt = $connect->prepare("INSERT INTO  usuarios(nombre, apellido, identificacion, correo, password, user, tel) VALUES ('$name', '$lastName', '$ID', '$email', '$pass', '$userName', '$tel')");
+    $stmt->execute();
+    $result = $stmt;
+
+    if($result){
+        echo "
+        <script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
+        <script language='JavaScript'>
+            document.addEventListener('DOMContentLoaded', function(){
+                swal({
+                    title: '¡Médico registrado correctamente!',
+                    icon: 'success',
+                    button: 'OK',
+                  }).then(() => {
+                        location.assign('../../index.php');
+                });
+            });
+        </script>
+        ";
+} else {
+    echo "
+        <script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
+        <script language='JavaScript'>
+            document.addEventListener('DOMContentLoaded', function(){
+                swal({
+                    title: '¡Algo salio mal!',
+                    icon: 'error',
+                    button: 'OK',
+                  }).then(() => {
+                    location.assign('../../index.phpp');
+                });
+            });
+        </script>
+        ";
+    }
+}
+
+function edit(){
     extract($_POST);
     require_once '../config.php';
     $stmt = $connect->prepare("UPDATE usuarios SET nombre = '$name', apellido = '$lastName', identificacion = '$ID', correo = '$email', user = '$userName', tel = '$tel' WHERE id_user = '$id'");
@@ -21,7 +63,7 @@ function edit()
             <script language='JavaScript'>
                 document.addEventListener('DOMContentLoaded', function(){
                     swal({
-                        title: '¡Datos actualizado correctamente!',
+                        title: '¡Datos actualizados correctamente!',
                         icon: 'success',
                         button: 'OK',
                       }).then(() => {

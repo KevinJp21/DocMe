@@ -140,7 +140,7 @@ if(isset($_SESSION['id'])) {
             <div class="container-fluid row">
                 <div class="btn-add-container col-12 pe-4 pt-4">
                     <button type="button" data-bs-toggle="modal" data-bs-target="#addMed" class="btn-add">Agregar médico</button>
-                    
+                    <?php include('../../backend/admin/addMed.php')?>
                 </div>
                 <div class="col-12 p-4">
                     <table class="table table-striped">
