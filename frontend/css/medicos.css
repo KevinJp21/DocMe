@@ -19,5 +19,60 @@
 }
 
 .container-fluid{
-    overflow-x: visible;
+    overflow-x: auto;
+}
+
+table{
+    background-color: white;
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+}
+
+th, td{
+    padding: 10px;
+    color: #0f5268;
+    text-align: center;
+    border-radius: 10px;
+}
+
+thead{
+    background-color: aliceblue;
+    color: #0f5268;
+}
+
+.dataTable-sorter::after, .dataTable-sorter::before {
+    display: none !important;
+}
+
+.dataTable-input{
+    background-color: aliceblue;
+    border-style: none;
+    border-radius: 10px;
+    
+}
+
+.dataTable-top{
+    color: aliceblue;
+}
+
+.dataTable-selector{
+    color: aliceblue;
+    background-color: #164757;
+    border-style: none;
+}
+
+.dataTable-bottom{
+    color: aliceblue;
+}
+
+.dataTable-pagination{
+    background-color: aliceblue;
+    border-style: none;
+    border-radius: 5px;
+}
+
+.dataTable-pagination a{
+    color: #164757;
+    border-radius: 5px;
 }

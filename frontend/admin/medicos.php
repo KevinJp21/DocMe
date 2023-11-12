@@ -21,6 +21,8 @@ if(isset($_SESSION['id'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://unpkg.com/vanilla-datatables@latest/dist/vanilla-dataTables.min.css" rel="stylesheet" type="text/css">
+    <script src="https://unpkg.com/vanilla-datatables@latest/dist/vanilla-dataTables.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="../../frontend/css/windows_admin.css">
     <link rel="stylesheet" href="../css/medicos.css">
 </head>
@@ -143,7 +145,7 @@ if(isset($_SESSION['id'])) {
                     <?php include('../../backend/admin/addMed.php')?>
                 </div>
                 <div class="col-12 p-4">
-                    <table class="table table-striped">
+                    <table class="table-striped" id="table">
                         <thead>
                             <tr>
                                 <th></th>
@@ -208,6 +210,10 @@ if(isset($_SESSION['id'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
     </script>
+    <script> 
+        var table = document.querySelector("#table");
+        var dataTable = new DataTable(table);
+</script>
 </body>
 
 </html>
