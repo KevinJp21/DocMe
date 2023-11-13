@@ -1,7 +1,7 @@
 <?php
 function getUserData($userId) {
     global $connect;
-    $stmt = $connect->prepare('SELECT nombre, apellido, user FROM usuarios WHERE id_user = :userId');
+    $stmt = $connect->prepare('SELECT nombre, apellido, user_name, rol FROM usuarios, roles WHERE id_usu = :userId AND usuarios.id_rol = roles.id_rol');
     $stmt->bindParam(':userId', $userId);
     $stmt->execute();
     $result = $stmt->fetch();

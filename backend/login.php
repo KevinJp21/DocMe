@@ -16,7 +16,7 @@ if(isset($_POST['login'])) {
 
     if($errMsg == '') {
       try {
-        $stmt = $connect->prepare('SELECT id_user, nombre, correo,password, user  FROM usuarios WHERE user = :user_name');
+        $stmt = $connect->prepare('SELECT id_usu, nombre, correo, password, user_name  FROM usuarios WHERE user_name = :user_name');
         $stmt->execute(array(
           ':user_name' => $user_name
           ));
@@ -26,20 +26,19 @@ if(isset($_POST['login'])) {
           $errMsg = "Usuario $user_name no encontrado.";
         }
         else {
-          if($pass == $data['password']) {
+          if($pass == $data['Password']) {
 
-            $_SESSION['id'] = $data['id_user'];
-            $_SESSION['name'] = $data['nombre'];
-            $_SESSION['user_name'] = $data['user'];
-            $_SESSION['email'] = $data['correo'];
-            $_SESSION['pass'] = $data['password'];
+            $_SESSION['id'] = $data['ID_Usu'];
+            $_SESSION['name'] = $data['Nombre'];
+            $_SESSION['user_name'] = $data['User_Name'];
+            $_SESSION['email'] = $data['Correo'];
+            $_SESSION['pass'] = $data['Password'];
             
             
             
-    if($_SESSION['id'] == $data['id_user']){//compara el id de la sesion con el de la base de datos, luego redirige a la pagina del login
+    if($data['ID_Usu'] == 1){
           header('location: ../frontend/admin/dashboard.php');
-        }
-            exit;
+        }//coninuar con los demas roles
           }
           else
             $errMsg = 'Contraseña incorrecta.';

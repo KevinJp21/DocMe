@@ -8,9 +8,10 @@ if(isset($_SESSION['id'])) {
     $userData = getUserData($_SESSION['id']);
     $name = $userData['nombre'];
     $last_name = $userData['apellido'];
-    $user_name = $userData['user'];
+    $user_name = $userData['user_name'];
+    $rol = $userData['rol'];
 
-    $stmt = $connect->prepare("SELECT * FROM usuarios WHERE 1");
+    $stmt = $connect->prepare("SELECT * FROM usuarios, medicos, especialidad WHERE usuarios.id_usu = medicos.id_usu AND medicos.ID_Esp = especialidad.ID_Esp");
     $stmt->execute();
     $listMed = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -49,7 +50,9 @@ if(isset($_SESSION['id'])) {
                                 <th scope="col">Identificación</th>
                                 <th scope="col">Correo</th>
                                 <th scope="col">usuario</th>
+                                <th scope="col">Fecha de nacimiento</th>
                                 <th scope="col">Teléfono</th>
+                                <th scope="col">Especilidad</th>
                                 <th>Editar</th>
                             </tr>
                         </thead>
@@ -59,15 +62,17 @@ if(isset($_SESSION['id'])) {
                         foreach ($listMed as $medico) {?>
                             <tr>
                                 <td scope="row"><?php echo $i = $i + 1; ?></td>
-                                <td><?php echo $medico['id_user']; ?></td>
-                                <td><?php echo $medico['nombre']; ?></td>
-                                <td><?php echo $medico['apellido']; ?></td>
-                                <td><?php echo $medico['identificacion']; ?></td>
-                                <td><?php echo $medico['correo']; ?></td>
-                                <td><?php echo $medico['user']; ?></td>
-                                <td><?php echo $medico['tel']; ?></td>
+                                <td><?php echo $medico['ID_Usu']; ?></td>
+                                <td><?php echo $medico['Nombre']; ?></td>
+                                <td><?php echo $medico['Apellido']; ?></td>
+                                <td><?php echo $medico['Identificacion']; ?></td>
+                                <td><?php echo $medico['Correo']; ?></td>
+                                <td><?php echo $medico['User_Name']; ?></td>
+                                <td><?php echo $medico['FechaNac']; ?></td>
+                                <td><?php echo $medico['Telefono']; ?></td>
+                                <td><?php echo $medico['Descripcion']; ?></td>
                                 <td>
-                                    <button type="button" data-bs-toggle="modal" class="btn btn-edit" data-bs-target="#editMed<?php echo $medico['id_user']; ?>"><i class="fa-solid fa-pen-to-square" name="btnEdit" value="btnEdit"></i></button>
+                                    <button type="button" data-bs-toggle="modal" class="btn btn-edit" data-bs-target="#editMed<?php echo $medico['ID_Usu']; ?>"><i class="fa-solid fa-pen-to-square" name="btnEdit" value="btnEdit"></i></button>
                                 </td>
                             </tr>
                             <?php include '../../backend/admin/editMed.php'; ?>

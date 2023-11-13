@@ -13,7 +13,7 @@
 
             <div class="name-user">
                 <div class="profile_name"><span><?php echo $name; ?></span> <span><?php echo $last_name; ?></span></div>
-                <div class="rol">Administrador</div>
+                <div class="rol"><?php echo $userData['rol'];?></div>
             </div>
         </div>
 

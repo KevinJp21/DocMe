@@ -7,7 +7,8 @@ if(isset($_SESSION['id'])) {
     $userData = getUserData($_SESSION['id']);
     $name = $userData['nombre'];
     $last_name = $userData['apellido'];
-    $user_name = $userData['user'];
+    $user_name = $userData['user_name'];
+    $rol = $userData['rol'];
 ?>
 
 <head>
