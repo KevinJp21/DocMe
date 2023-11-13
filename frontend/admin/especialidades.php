@@ -10,9 +10,9 @@ if(isset($_SESSION['id'])) {
     $last_name = $userData['apellido'];
     $rol = $userData['rol'];
 
-    $stmt = $connect->prepare("SELECT * FROM consultorios WHERE 1");
+    $stmt = $connect->prepare("SELECT * FROM especialidad WHERE 1");
     $stmt->execute();
-    $listCon = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $listEsp = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <head>
@@ -35,8 +35,8 @@ if(isset($_SESSION['id'])) {
         <div class="content-area">
             <div class="container-fluid row">
             <div class="btn-add-container col-12 ps-4 pt-4">
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#addCon" class="btn-add">Agregar consultorio</button>
-                    <?php include('../../backend/admin/addConsultorio.php')?>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#addEsp" class="btn-add">Agregar Especialidad</button>
+                    <?php include('../../backend/admin/addEspecialidad.php')?>
                 </div>
                 <div class="col-12 p-4">
                     <table class="table-striped" id="table">
@@ -46,25 +46,23 @@ if(isset($_SESSION['id'])) {
                                 <th scope="col">ID</th>
                                 <th scope="col">Codigo</th>
                                 <th scope="col">Descripcion</th>
-                                <th scope="col">Disponibilidad</th>
                                 <th>Editar</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php 
                         $i = 0;
-                        foreach ($listCon as $consultorio) {?>
+                        foreach ($listEsp as $especialidad) {?>
                             <tr>
                                 <td scope="row"><?php echo $i = $i + 1; ?></td>
-                                <td><?php echo $consultorio['ID_Con']; ?></td>
-                                <td><?php echo $consultorio['Codigo']; ?></td>
-                                <td><?php echo $consultorio['Desc_Con']; ?></td>
-                                <td><?php echo $consultorio['Disponibilidad']; ?></td>
+                                <td><?php echo $especialidad['ID_Esp']; ?></td>
+                                <td><?php echo $especialidad['Codigo_Esp']; ?></td>
+                                <td><?php echo $especialidad['Descripcion']; ?></td>
                                 <td>
-                                    <button type="button" data-bs-toggle="modal" class="btn btn-edit" data-bs-target="#EditCon<?php echo $consultorio['ID_Con']; ?>"><i class="fa-solid fa-pen-to-square" name="btnEdit" value="btnEdit"></i></button>
+                                    <button type="button" data-bs-toggle="modal" class="btn btn-edit" data-bs-target="#EditEsp<?php echo $especialidad['ID_Esp']; ?>"><i class="fa-solid fa-pen-to-square" name="btnEdit" value="btnEdit"></i></button>
                                 </td>
                             </tr>
-                            <?php include '../../backend/admin/editConsultorio.php'; ?>
+                            <?php include '../../backend/admin/editEspecialidad.php'; ?>
                             <?php }?>
                         </tbody>
                     </table>

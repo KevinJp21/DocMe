@@ -14,7 +14,7 @@
                             <div class="mb-3">
                                 <label for="cod" class="form-label">Codigo</label>
                                 <input type="text" id="cod" name="cod" class="form-control"
-                                    value="<?php echo $consultorio['Cod_Con']; ?>" require="">
+                                    value="<?php echo $consultorio['Codigo']; ?>" require="">
                             </div>
                         </div>
 
@@ -26,7 +26,16 @@
                             </div>
                         </div>
 
+                        <div class="col-sm-12">
+                            <div class="mb-3">
+                                <label for="desc" class="form-label">Descripcion</label>
+                                <input type="text" id="desc" name="desc" class="form-control"
+                                    value="<?php echo $consultorio['Desc_Con']; ?>" require="">
+                            </div>
+                        </div>
+
                         <input type="hidden" name="accion" value="EditCon">
+                        <input type="hidden" name="id" value="<?php echo $consultorio['ID_Con']; ?>">
                         <br>
                     </div>
                     <div class="modal-footer">
@@ -38,4 +47,3 @@
         </div>
     </div>
 </div>
-<?php

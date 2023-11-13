@@ -11,9 +11,17 @@ if(isset($_SESSION['id'])) {
     $user_name = $userData['user_name'];
     $rol = $userData['rol'];
 
-    $stmt = $connect->prepare("SELECT * FROM usuarios, medicos, especialidad WHERE usuarios.id_usu = medicos.id_usu AND medicos.ID_Esp = especialidad.ID_Esp");
+    $stmt = $connect->prepare("SELECT * FROM usuarios, medicos, especialidad, consultorios WHERE usuarios.id_usu = medicos.id_usu AND medicos.ID_Esp = especialidad.ID_Esp AND medicos.ID_Con = consultorios.ID_Con");
     $stmt->execute();
     $listMed = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $stmt2 = $connect->prepare("SELECT id_esp, descripcion from especialidad WHERE 1");
+    $stmt2->execute();
+    $listEsp = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+
+    $stmt3 = $connect->prepare("SELECT id_con, codigo, desc_con from consultorios WHERE 1");
+    $stmt3->execute();
+    $listCon = $stmt3->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <head>
@@ -52,7 +60,8 @@ if(isset($_SESSION['id'])) {
                                 <th scope="col">usuario</th>
                                 <th scope="col">Fecha de nacimiento</th>
                                 <th scope="col">Teléfono</th>
-                                <th scope="col">Especilidad</th>
+                                <th scope="col">Especialidad</th>
+                                <th scope="col">Consultorio</th>
                                 <th>Editar</th>
                             </tr>
                         </thead>
@@ -71,6 +80,7 @@ if(isset($_SESSION['id'])) {
                                 <td><?php echo $medico['FechaNac']; ?></td>
                                 <td><?php echo $medico['Telefono']; ?></td>
                                 <td><?php echo $medico['Descripcion']; ?></td>
+                                <td><?php echo $medico['Desc_Con']; ?></td>
                                 <td>
                                     <button type="button" data-bs-toggle="modal" class="btn btn-edit" data-bs-target="#editMed<?php echo $medico['ID_Usu']; ?>"><i class="fa-solid fa-pen-to-square" name="btnEdit" value="btnEdit"></i></button>
                                 </td>
@@ -83,8 +93,6 @@ if(isset($_SESSION['id'])) {
             </div>
             <!--Footer elements-->
              <?php include('../tamplates/footer.php')?>
-
-
         </div>
 
     </div>

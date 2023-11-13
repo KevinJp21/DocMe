@@ -26,17 +26,17 @@ if(isset($_POST['login'])) {
           $errMsg = "Usuario $user_name no encontrado.";
         }
         else {
-          if($pass == $data['Password']) {
+          if($pass == $data['password']) {
 
-            $_SESSION['id'] = $data['ID_Usu'];
-            $_SESSION['name'] = $data['Nombre'];
-            $_SESSION['user_name'] = $data['User_Name'];
-            $_SESSION['email'] = $data['Correo'];
-            $_SESSION['pass'] = $data['Password'];
+            $_SESSION['id'] = $data['id_usu'];
+            $_SESSION['name'] = $data['nombre'];
+            $_SESSION['user_name'] = $data['user_name'];
+            $_SESSION['email'] = $data['correo'];
+            $_SESSION['pass'] = $data['password'];
             
             
             
-    if($data['ID_Usu'] == 1){
+    if($data['id_rol'] == 1){
           header('location: ../frontend/admin/dashboard.php');
         }//coninuar con los demas roles
           }

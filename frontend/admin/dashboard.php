@@ -33,16 +33,7 @@ if(isset($_SESSION['id'])) {
                 <span class="fs-5">Bienvenido(a), <?php echo $user_name; ?></span>
             </div>
             <div class="row">
-                <div class="col-md-4 mt-4">
-                    <div class="card">
-                        <div class="card-body pb-0">
-                            <h2 class="mb-2">0</h2>
-                            <p>Citas</p>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mt-4">
+                <div class="col-md-3 mt-4">
                     <div class="card">
                         <div class="card-body pb-0">
                             <h2 class="mb-2">0</h2>
@@ -51,11 +42,29 @@ if(isset($_SESSION['id'])) {
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mt-4">
+                <div class="col-md-3 mt-4">
                     <div class="card">
                         <div class="card-body pb-0">
                             <h2 class="mb-2">0</h2>
-                            <p>Médicos</p>
+                            <p>Medicos</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 mt-4">
+                    <div class="card">
+                        <div class="card-body pb-0">
+                            <h2 class="mb-2">0</h2>
+                            <p>Consultorios</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 mt-4">
+                    <div class="card">
+                        <div class="card-body pb-0">
+                            <h2 class="mb-2">0</h2>
+                            <p>Especialidades</p>
 
                         </div>
                     </div>

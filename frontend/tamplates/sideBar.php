@@ -99,6 +99,13 @@
                     <span class="link_name">Horarios</span>
                 </a>
             </li>
+
+            <li>
+                <a href="../admin/especialidades.php">
+                    <i class="fs-5 fa-solid fa-layer-group"></i>
+                    <span class="link_name">Especialidades</span>
+                </a>
+            </li>
             <li class="mt-auto">
                 <a href="?logout">
                     <i class='bx bx-log-out'></i>

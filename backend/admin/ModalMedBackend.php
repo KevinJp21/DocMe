@@ -7,23 +7,37 @@ if (isset($_POST['accion'])) {
         case 'add';
             add();
             break;
+        case 'editPac';
+            editPac();
+            break;
         case 'addCon';
             addCon();
             break;
         case 'EditCon';
             editCon();
             break;
+        case 'addEsp';
+            addEsp();
+            break;
+        case 'EditEsp';
+            editEsp();
+            break;
     }
 }
-
 function add(){
     extract($_POST);
     require_once '../config.php';
-    $stmt = $connect->prepare("INSERT INTO  usuarios(nombre, apellido, identificacion, correo, password, user, tel) VALUES ('$name', '$lastName', '$ID', '$email', '$pass', '$userName', '$tel')");
+    $stmt = $connect->prepare("INSERT INTO usuarios (Nombre, Apellido, Correo, Password, User_Name, FechaNac, Telefono, Identificacion, ID_Rol) VALUES ('$name', '$lastName', '$email', '$pass', '$userName', '$fechaNac', '$tel', '$ID', 3)");
     $stmt->execute();
-    $result = $stmt;
 
-    if($result){
+    $stmt2 = $connect->prepare("INSERT INTO medicos (ID_Usu, ID_Esp, ID_Con) VALUES (LAST_INSERT_ID(), '$Esp', '$Con')");
+    $stmt2->execute();
+
+    $result = $stmt;
+    $result2 = $stmt2;
+
+
+    if($result and $result2){
         echo "
         <script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
         <script language='JavaScript'>
@@ -59,7 +73,91 @@ function add(){
 function edit(){
     extract($_POST);
     require_once '../config.php';
-    $stmt = $connect->prepare("UPDATE usuarios SET nombre = '$name', apellido = '$lastName', identificacion = '$ID', correo = '$email', user = '$userName', tel = '$tel' WHERE id_user = '$id'");
+    $stmt = $connect->prepare("UPDATE usuarios SET Nombre = '$name', Apellido = '$lastName', Correo = '$email' , User_Name = '$userName', FechaNac = '$fechaNac', Telefono = '$tel', Identificacion = '$ID' WHERE ID_Usu = '$id'");
+    $stmt->execute();
+    $result = $stmt;
+
+    $stmt2 = $connect->prepare("UPDATE medicos SET ID_Esp = '$Esp', ID_Con = '$Con' WHERE ID_Usu = '$id'");
+    $stmt2->execute();
+    $result2 = $stmt2;
+
+    if ($result and $result2) {
+        echo "
+            <script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
+            <script language='JavaScript'>
+                document.addEventListener('DOMContentLoaded', function(){
+                    swal({
+                        title: '¡Datos actualizados correctamente!',
+                        icon: 'success',
+                        button: 'OK',
+                      }).then(() => {
+                            location.assign('../../index.php');
+                    });
+                });
+            </script>
+            ";
+    } else {
+        echo "
+            <script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
+            <script language='JavaScript'>
+                document.addEventListener('DOMContentLoaded', function(){
+                    swal({
+                        title: '¡Algo salio mal!',
+                        icon: 'error',
+                        button: 'OK',
+                      }).then(() => {
+                        location.assign('../../index.phpp');
+                    });
+                });
+            </script>
+            ";
+    }
+}
+
+function editPac(){
+    extract($_POST);
+    require_once '../config.php';
+    $stmt = $connect->prepare("UPDATE usuarios SET Nombre = '$name', Apellido = '$lastName', Correo = '$email' , User_Name = '$userName', FechaNac = '$fechaNac', Telefono = '$tel', Identificacion = '$ID' WHERE ID_Usu = '$id'");
+    $stmt->execute();
+    $result = $stmt;
+
+    if ($result) {
+        echo "
+            <script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
+            <script language='JavaScript'>
+                document.addEventListener('DOMContentLoaded', function(){
+                    swal({
+                        title: '¡Datos actualizados correctamente!',
+                        icon: 'success',
+                        button: 'OK',
+                      }).then(() => {
+                            location.assign('../../index.php');
+                    });
+                });
+            </script>
+            ";
+    } else {
+        echo "
+            <script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
+            <script language='JavaScript'>
+                document.addEventListener('DOMContentLoaded', function(){
+                    swal({
+                        title: '¡Algo salio mal!',
+                        icon: 'error',
+                        button: 'OK',
+                      }).then(() => {
+                        location.assign('../../index.phpp');
+                    });
+                });
+            </script>
+            ";
+    }
+}
+
+function editEsp(){
+    extract($_POST);
+    require_once '../config.php';
+    $stmt = $connect->prepare("UPDATE especialidad SET Codigo_Esp = '$cod', Descripcion = '$desc' WHERE ID_Esp = '$id'");
     $stmt->execute();
     $result = $stmt;
 
@@ -100,7 +198,7 @@ function addCon(){
     extract($_POST);
     require_once '../config.php';
     
-    $stmt = $connect->prepare("INSERT INTO  consultorios(cod_Con, Disponibilidad) VALUES ('$cod', '$dispo')");
+    $stmt = $connect->prepare("INSERT INTO  consultorios(Codigo, Desc_Con, Disponibilidad) VALUES ('$cod', '$desc', '$dispo')");
     $stmt->execute();
     $result = $stmt;
 
@@ -140,7 +238,7 @@ function addCon(){
 function editCon(){
     extract($_POST);
     require_once '../config.php';
-    $stmt = $connect->prepare("UPDATE consultorios SET Cod_Con = '$cod', Disponibilidad = '$dispo'");
+    $stmt = $connect->prepare("UPDATE consultorios SET Codigo = '$cod', Disponibilidad = '$dispo', Desc_Con = '$desc' WHERE ID_Con = '$id'");
     $stmt->execute();
     $result = $stmt;
 
@@ -174,6 +272,47 @@ function editCon(){
                 });
             </script>
             ";
+    }
+}
+
+function addEsp(){
+    extract($_POST);
+    require_once '../config.php';
+
+    $stmt = $connect->prepare("INSERT INTO  especialidad (Codigo_Esp, Descripcion) VALUES ('$cod', '$desc')");
+    $stmt->execute();
+    $result = $stmt;
+
+    if($result){
+        echo "
+        <script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
+        <script language='JavaScript'>
+            document.addEventListener('DOMContentLoaded', function(){
+                swal({
+                    title: '¡La especialidad se agregó correctamente!',
+                    icon: 'success',
+                    button: 'OK',
+                  }).then(() => {
+                        location.assign('../../index.php');
+                });
+            });
+        </script>
+        ";
+} else {
+    echo "
+        <script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
+        <script language='JavaScript'>
+            document.addEventListener('DOMContentLoaded', function(){
+                swal({
+                    title: '¡Algo salio mal!',
+                    icon: 'error',
+                    button: 'OK',
+                  }).then(() => {
+                    location.assign('../../index.phpp');
+                });
+            });
+        </script>
+        ";
     }
 }
 
