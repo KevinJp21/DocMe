@@ -58,7 +58,7 @@ if(isset($_SESSION['id'])) {
                         $i = 0;
                         foreach ($listMed as $medico) {?>
                             <tr>
-                                <th scope="row"><?php echo $i = $i + 1; ?></th>
+                                <td scope="row"><?php echo $i = $i + 1; ?></td>
                                 <td><?php echo $medico['id_user']; ?></td>
                                 <td><?php echo $medico['nombre']; ?></td>
                                 <td><?php echo $medico['apellido']; ?></td>

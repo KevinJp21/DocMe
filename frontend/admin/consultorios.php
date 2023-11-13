@@ -10,9 +10,9 @@ if(isset($_SESSION['id'])) {
     $last_name = $userData['apellido'];
     $user_name = $userData['user'];
 
-    $stmt = $connect->prepare("SELECT * FROM usuarios WHERE 1");
+    $stmt = $connect->prepare("SELECT * FROM consultorios WHERE 1");
     $stmt->execute();
-    $listMed = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $listCon = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <head>
@@ -34,39 +34,35 @@ if(isset($_SESSION['id'])) {
         <?php include('../tamplates/sideBar.php')?>
         <div class="content-area">
             <div class="container-fluid row">
+            <div class="btn-add-container col-12 ps-4 pt-4">
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#addCon" class="btn-add">Agregar consultorio</button>
+                    <?php include('../../backend/admin/addConsultorio.php')?>
+                </div>
                 <div class="col-12 p-4">
                     <table class="table-striped" id="table">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th scope="col">ID</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Apellido</th>
-                                <th scope="col">Identificación</th>
-                                <th scope="col">Correo</th>
-                                <th scope="col">usuario</th>
-                                <th scope="col">Teléfono</th>
+                                <th scope="col">Codigo</th>
+                                <th scope="col">Disponibilidad</th>
                                 <th>Editar</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php 
                         $i = 0;
-                        foreach ($listMed as $paciente) {?>
+                        foreach ($listCon as $consultorio) {?>
                             <tr>
                                 <td scope="row"><?php echo $i = $i + 1; ?></td>
-                                <td><?php echo $paciente['id_user']; ?></td>
-                                <td><?php echo $paciente['nombre']; ?></td>
-                                <td><?php echo $paciente['apellido']; ?></td>
-                                <td><?php echo $paciente['identificacion']; ?></td>
-                                <td><?php echo $paciente['correo']; ?></td>
-                                <td><?php echo $paciente['user']; ?></td>
-                                <td><?php echo $paciente['tel']; ?></td>
+                                <td><?php echo $consultorio['ID_Con']; ?></td>
+                                <td><?php echo $consultorio['Cod_Con']; ?></td>
+                                <td><?php echo $consultorio['Disponibilidad']; ?></td>
                                 <td>
-                                    <button type="button" data-bs-toggle="modal" class="btn btn-edit" data-bs-target="#editPac<?php echo $paciente['id_user']; ?>"><i class="fa-solid fa-pen-to-square" name="btnEdit" value="btnEdit"></i></button>
+                                    <button type="button" data-bs-toggle="modal" class="btn btn-edit" data-bs-target="#EditCon<?php echo $consultorio['ID_Con']; ?>"><i class="fa-solid fa-pen-to-square" name="btnEdit" value="btnEdit"></i></button>
                                 </td>
                             </tr>
-                            <?php include '../../backend/admin/editPaciente.php'; ?>
+                            <?php include '../../backend/admin/editConsultorio.php'; ?>
                             <?php }?>
                         </tbody>
                     </table>

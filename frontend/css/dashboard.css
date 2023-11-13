@@ -54,19 +54,25 @@
 
 table{
     background-color: white;
-    width: 100%;
     border-collapse: collapse;
     border-radius: 10px;
+}
+
+.datatable-container{
+    border-bottom: none !important;
 }
 
 th a{
     text-align: center;
 }
 
+td{
+    text-align: center;
+}
+
 th, td{
     padding: 10px;
     color: #0f5268;
-    text-align: center;
     border-radius: 10px;
 }
 
@@ -83,7 +89,7 @@ thead{
     background-color: aliceblue;
     border-style: none;
     border-radius: 10px;
-    width: 200px;
+    width: 250px;
     height: 40px;
     padding: 6;
     
