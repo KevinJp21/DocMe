@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-tittle">
-                    Registrar médico
+                    Agendar Cita
                 </h3>
             </div>
             <div class="modal-body">
