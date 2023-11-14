@@ -3,167 +3,71 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-tittle">
-                    Registrar médico
+                    Agendar cita
                 </h3>
             </div>
             <div class="modal-body">
-                <form action="../../backend/admin/ModalMedBackend.php" method="POST">
+                <form action="../../backend/paciente/AgendarCitaBackend.php" method="POST">
                     <div class="row">
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label for="nombre" class="form-label">Nombre</label>
-                                <input type="text" id="name" name="name" class="form-control" value=""
-                                    require="">
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label for="lastName" class="form-label">Apellido</label>
-                                <input type="text" id="lastName" name="lastName" class="form-control" value=""
-                                    require="">
-                            </div>
-                        </div>
-
-                        <div class="col-12">
-                            <label for="ID" class="form-label">Identificación</label>
-                            <input type="text" id="ID" name="ID" class="form-control" value=""
-                                require="">
-                        </div>
-
-                        <div class="col-12">
-                            <label for="email" class="form-label">Correo</label>
-                            <input type="email" id="email" name="email" class="form-control" value=""
-                                require="">
-                        </div>
-
-                        <div class="col-12">
-                            <label for="password" class="form-label">Contraseña</label>
-                            <input type="password" id="pass" name="pass" class="form-control" value=""
-                                require="">
-                        </div>
-
-                        <div class="col-6 mb-3">
-                            <label for="userName" class="form-label">Usuario</label>
-                            <input type="text" id="userName" name="userName" class="form-control" value=""
-                                require="">
-                        </div>
-
-                        <div class="col-6 mb-3">
-                            <label for="fechanac" class="form-label">Fecha de nacimiento</label>
-                            <input type="date" id="fechaNac" name="fechaNac" class="form-control" value=""
-                                require="">
-                        </div>
-
-                        <div class="col-6 mb-3">
-                            <label for="tel" class="form-label">Teléfono</label>
-                            <input type="text" id="tel" name="tel" class="form-control" value=""
-                                require="">
-                        </div>
-
-                        <div class="col-6 mb-3">
-                            <label for="Esp" class="form-label">Especialidad</label>
-                            <select class="form-select" aria-label="Default select example" name="Esp"
-                                require="">
-                                <option selected>Seleccionar</option>
-                                <?php 
-                                foreach ($listEsp as $especialidad) {?>
-                                <option id="esp" value="<?php echo $especialidad['id_esp']; ?>"><?php echo $especialidad['descripcion']; ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-
-                        <div class="col-12 mb-3">
-                            <label for="Con" class="form-label">Consultorio</label>
-                            <select class="form-select" aria-label="Default select example" name="Con"
-                                require="">
-                                <option selected>Seleccionar</option>
-                                <?php 
-                                foreach ($listCon as $consultorio) {?>
-                                <option value="<?php echo $consultorio['id_con']; ?>"><?php echo $consultorio['desc_con']; ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-
-                        <input type="hidden" name="accion" value="add">
-                        <br>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Registrar</button>
-                    </div>
-                </form>
+            <div class="col-6 mb-3">
+                <label for="mes" class="form-label">Mes</label>
+                <select class="form-select" aria-label="Default select example" name="mes" required>
+                    <!-- Opciones para el mes (puedes personalizar según tus necesidades) -->
+                    <option value="01">Enero</option>
+                    <option value="02">Febrero</option>
+                    <!-- Agrega las opciones para los demás meses -->
+                </select>
             </div>
-        </div>
-    </div>
+
+            <div class="col-6 mb-3">
+                <label for="dia" class="form-label">Día</label>
+                <select class="form-select" aria-label="Default select example" name="dia" required>
+                    <!-- Opciones para el día (puedes personalizar según tus necesidades) -->
+                    <?php
+                    for ($i = 1; $i <= 31; $i++) {
+                        echo "<option value=\"$i\">$i</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+
+            <div class="col-6 mb-3">
+    <label for="tipoConsulta" class="form-label">Tipo de Consulta</label>
+    <select class="form-select" aria-label="Default select example" name="tipoConsulta" required>
+        <option selected>Seleccionar</option>
+        <option value="Medicina general">Medicina general</option>
+        <option value="Pediatria">Pediatria</option>
+        <option value="Odontología">Odontología</option>
+    </select>
+<br>
+<div class="col-12 mb-3">
+                            <button id="buscarCitasBtn" type="submit" class="btn btn-primary">Buscar Citas Disponibles</button>
+                        </div>
 </div>
 
+<div id="citasDisponiblesDiv"></div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-    document.getElementById('addMed').addEventListener('submit', function(event) {
-        const nameInput = document.getElementById('name');
-        const name = nameInput.value;
-
-        const lastNameInput = document.getElementById('lastName');
-        const lastName = lastNameInput.value;
-
-        const IDInput = document.getElementById('ID');
-        const ID = IDInput.value;
-
-        const emailInput = document.getElementById('email');
-        const email = emailInput.value;
-
-        const userNameInput = document.getElementById('userName');
-        const userName = userNameInput.value;
-
-        const telInput = document.getElementById('tel');
-        const tel = telInput.value;
-
-        const espInput = document.getElementById('esp');
-        const esp = espInput.value;
-
-
-        if (!/^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$/.test(name)) {
-            event.preventDefault(); //Evitar que el formulario se envie
-            nameInput.classList.add('is-invalid'); //Agregar invalidacion
-        } else {
-            nameInput.classList.remove('is-invalid'); //Eliminar la invalidacion
-        }
-
-        if (!/^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$/.test(lastName)) {
+    $(document).ready(function() {
+        // Manejar clic en el botón "Buscar Citas Disponibles"
+        $('#buscarCitasBtn').on('click', function(event) {
+            // Prevenir el comportamiento predeterminado del formulario
             event.preventDefault();
-            lastNameInput.classList.add('is-invalid'); 
-        } else {
-            lastNameInput.classList.remove('is-invalid')
-        }
 
-        if (!/^\d+$/.test(ID)) {
-            event.preventDefault();
-            IDInput.classList.add('is-invalid');
-        } else {
-            IDInput.classList.remove('is-invalid');
-        }
-
-        if (!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]+$/.test(email)) {
-            event.preventDefault();
-            emailInput.classList.add('is-invalid');
-        } else {
-            emailInput.classList.remove('is-invalid');
-        }
-
-        if (!/^(?=.*[A-Za-z])[A-Za-z0-9._-]+$/.test(userName)) {
-            event.preventDefault();
-            userNameInput.classList.add('is-invalid');
-        } else {
-            userNameInput.classList.remove('is-invalid');
-        }
-
-        if (!/^\d+$/.test(tel)) {
-            event.preventDefault();
-            telInput.classList.add('is-invalid');
-        } else {
-            telInput.classList.remove('is-invalid');
-        }
-
+            // Realizar la solicitud AJAX para obtener citas disponibles
+            $.ajax({
+                type: 'GET',
+                url: "../../backend/paciente/AgendarCitaBackend.php",
+                dataType: 'html',  // Cambia al tipo de datos que devuelve tu backend
+                success: function(response) {
+                    // Actualizar el contenido del div con las citas disponibles
+                    $('#citasDisponiblesDiv').html(response);
+                },
+                error: function(error) {
+                    console.error('Error al obtener citas disponibles:', error);
+                }
+            });
+        });
     });
 </script>
 
