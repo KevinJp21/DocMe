@@ -11,17 +11,37 @@ if (isset($_SESSION['id'])) {
     $user_name = $userData['user_name'];
     $rol = $userData['rol'];
 
-    $stmt = $connect->prepare('SELECT * FROM usuarios, medicos, especialidad, consultorios WHERE usuarios.id_usu = medicos.id_usu AND medicos.ID_Esp = especialidad.ID_Esp AND medicos.ID_Con = consultorios.ID_Con');
+    $stmt = $connect->prepare("
+    SELECT
+    p.ID_Usu, 
+    p.Nombre,
+    p.Apellido,
+    p.Identificacion,
+    p.Correo,
+    p.Telefono,
+    ci.FechaCita,
+    ci.Motivo,
+    ci.Estado,
+    m.Nombre AS NombreM,
+    m.Apellido AS ApellidoM,
+    esp.Descripcion,
+    cons.Desc_Con
+    
+  FROM usuarios p
+  INNER JOIN 
+  citas ci
+  ON p.ID_Usu = ci.ID_Paciente
+  INNER JOIN medicos me
+  ON ci.ID_Med = me.ID_Usu
+  INNER JOIN usuarios m
+  ON m.ID_Usu = me.ID_Usu
+  INNER JOIN especialidad esp
+  ON me.ID_Esp = esp.ID_Esp
+  INNER JOIN consultorios cons
+  ON me.ID_Con = cons.ID_Con
+    ");
     $stmt->execute();
-    $listMed = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    $stmt2 = $connect->prepare('SELECT * FROM usuarios, pacientes WHERE usuarios.id_usu = pacientes.id_usu');
-    $stmt2->execute();
-    $listPac = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-
-    $stmt3 = $connect->prepare('SELECT c.Estado, c.Motivo, c.FechaCita FROM citas c, pacientes p , medicos m WHERE c.id_paciente = p.id_usu AND c.id_med = m.id_usu');
-    $stmt3->execute();
-    $listCita = $stmt3->fetchAll(PDO::FETCH_ASSOC);
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -147,32 +167,30 @@ if (isset($_SESSION['id'])) {
                         <tbody>
                             <?php 
                         $i = 0;
-                        foreach ($listMed as $medico) {
-                            foreach ($listPac as $paciente) {
-                                foreach ($listCita as $cita) {
+                        foreach ($result as $cita) {
                             ?>
                             <tr>
                                 <td scope="row"><?php echo $i = $i + 1; ?></td>
-                                <td><?php echo $paciente['Nombre']; ?></td>
-                                <td><?php echo $paciente['Apellido']; ?></td>
-                                <td><?php echo $paciente['Identificacion']; ?></td>
-                                <td><?php echo $paciente['Correo']; ?></td>
-                                <td><?php echo $paciente['Telefono']; ?></td>
+                                <td><?php echo $cita['Nombre']; ?></td>
+                                <td><?php echo $cita['Apellido']; ?></td>
+                                <td><?php echo $cita['Identificacion']; ?></td>
+                                <td><?php echo $cita['Correo']; ?></td>
+                                <td><?php echo $cita['Telefono']; ?></td>
                                 <td><?php echo $cita['FechaCita']; ?></td>
                                 <td><?php echo $cita['Motivo']; ?></td>
                                 <td><?php echo $cita['Estado']; ?></td>
-                                <td><?php echo $medico['Nombre']; ?> <?php echo $medico['Apellido']; ?></td>
-                                <td><?php echo $medico['Descripcion']; ?></td>
-                                <td><?php echo $medico['Desc_Con']; ?></td>
+                                <td><?php echo $cita['NombreM']; ?> <?php echo $cita['ApellidoM']; ?></td>
+                                <td><?php echo $cita['Descripcion']; ?></td>
+                                <td><?php echo $cita['Desc_Con']; ?></td>
                                 <td>
                                     <button type="button" data-bs-toggle="modal" class="btn btn-edit"
-                                        data-bs-target="#editMed<?php echo $medico['ID_Usu']; ?>"><i
+                                        data-bs-target="#editMed<?php echo $cita['ID_Usu']; ?>"><i
                                             class="fa-solid fa-pen-to-square" name="btnEdit"
                                             value="btnEdit"></i></button>
                                 </td>
                             </tr>
                             <?php include '../../backend/admin/editMed.php'; ?>
-                            <?php }}}?>
+                            <?php }?>
                         </tbody>
                     </table>
                 </div>
