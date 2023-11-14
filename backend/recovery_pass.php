@@ -66,7 +66,7 @@ if (isset($_POST['recovery'])) {
             $stmt->bindParam(':email', $email);
             $stmt->execute();
 
-            $user_name = $user['user'];
+            $user_name = $user['user_name'];
 
             // Enviamos un correo electrónico al usuario con el enlace de recuperación de contraseña.
             $subject = 'Recuperación de contraseña de DocMe';
