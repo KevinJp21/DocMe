@@ -2,7 +2,13 @@
 //error_reporting(0); //poner slash para quitar logs/errores de consola
 session_start();
     if (isset($_SESSION['id'])){
-        header('Location: ../frontend/admin/dashboard.php');
+        if($_SESSION['rol'] == '1'){
+            header('Location: ../frontend/admin/dashboard.php');
+        }else if($_SESSION['rol'] == '2'){
+            header('Location: ../frontend/paciente/dashboard.php');
+        }else{
+            header('Location: ../index.php');
+        }
     }
     
 include_once '../backend/login.php'
@@ -31,9 +37,6 @@ include_once '../backend/login.php'
             }
         ?>
             <h3>Bienvenido a DocMe</h3>
-
-      
-
     <div class="input-div nit">
         <div class="div">
              <input type="text"  name="user_name" value="<?php if(isset($_POST['user_name'])) echo $_POST['user_name'] ?>" autocomplete="off" placeholder="Usuario">

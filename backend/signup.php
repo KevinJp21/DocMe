@@ -4,16 +4,7 @@ require '../backend/config.php';
 
 if (isset($_POST['signup'])) {
     $errMsg = '';
-
-// Obtener los datos del formulario
-    $name = $_POST['name'];
-    $last_name = $_POST['last_name'];
-    $ID = $_POST['ID'];
-    $pass = $_POST['password'];
-    $email = $_POST['email'];
-    $user_name = $_POST['user_name'];
-    $phone_num = $_POST['phone_num'];
-
+    extract($_POST);
 
     if (!preg_match('/^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$/', $name)) {
         $errMsg="Ingrese un nombre valido.";
@@ -44,7 +35,7 @@ if (isset($_POST['signup'])) {
         $result2 = $stmt2->fetch();
 
         $check_user = "SELECT * FROM usuarios
-        WHERE user = :user_name";
+        WHERE User_Name = :user_name";
         $stmt3 = $connect->prepare($check_user);
         $stmt3->bindParam(':user_name', $user_name);
         $stmt3->execute();
@@ -58,22 +49,12 @@ if (isset($_POST['signup'])) {
             $errMsg = "Existe una cuenta con ese nombre de usuario.";
         }else{
             try {
-
-                $sql = "INSERT INTO  usuarios(nombre, apellido, identificacion, correo, password, user, tel) VALUES (:name, :last_name, :ID, :email, :pass, :user_name, :phone_num)";
-    
-                $stmt = $connect->prepare($sql);
-    
-                $stmt->bindParam(':name', $name);
-                $stmt->bindParam(':last_name', $last_name);
-                $stmt->bindParam(':ID', $ID);
-                $stmt->bindParam(':email', $email);
-                $stmt->bindParam(':pass', $pass);
-                $stmt->bindParam(':user_name', $user_name);
-                $stmt->bindParam(':phone_num', $phone_num);
-    
-                
-                
+                $stmt = $connect->prepare("INSERT INTO  usuarios(Nombre, Apellido, Correo, Password, User_Name, FechaNac, Telefono, Identificacion, ID_Rol) VALUES ('$name', '$last_name', '$email', '$password','$user_name', '$fechaNac', '$phone_num', '$ID', 2)");
                 $stmt->execute();
+
+                $stmt2 = $connect->prepare("INSERT INTO pacientes(ID_Usu) VALUES (LAST_INSERT_ID())");
+                $stmt2->execute();
+                
                 // Redirecciona a la página de inicio de sesión después del registro
                 header('Location: ../frontend/login.php');
                 exit();

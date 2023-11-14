@@ -27,7 +27,7 @@ if (isset($_POST['accion'])) {
 function add(){
     extract($_POST);
     require_once '../config.php';
-    $stmt = $connect->prepare("INSERT INTO usuarios (Nombre, Apellido, Correo, Password, User_Name, FechaNac, Telefono, Identificacion, ID_Rol) VALUES ('$name', '$lastName', '$email', '$pass', '$userName', '$fechaNac', '$tel', '$ID', 3)");
+    $stmt = $connect->prepare("INSERT INTO usuarios (Nombre, Apellido, Correo, Password, User_Name, FechaNac, Telefono, Identificacion) VALUES ('$name', '$lastName', '$email', '$pass', '$userName', '$fechaNac', '$tel', '$ID', 3)");
     $stmt->execute();
 
     $stmt2 = $connect->prepare("INSERT INTO medicos (ID_Usu, ID_Esp, ID_Con) VALUES (LAST_INSERT_ID(), '$Esp', '$Con')");

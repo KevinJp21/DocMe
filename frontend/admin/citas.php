@@ -1,6 +1,6 @@
 <?php 
 session_start();
-require '../../backend/admin/dashboard.php';
+include '../../backend/dashboard.php';
 require '../../backend/config.php';
 require '../../backend/getUserData.php';
 if(isset($_SESSION['id'])) { 

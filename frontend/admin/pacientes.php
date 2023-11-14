@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include '../../backend/admin/dashboard.php';
+include '../../backend/dashboard.php';
 include '../../backend/getUserData.php';
 include '../../backend/config.php';
 

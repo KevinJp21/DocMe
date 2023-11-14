@@ -1,9 +1,12 @@
 <?php 
 session_start();
 include '../../backend/config.php';
-include '../../backend/admin/dashboard.php';
+include '../../backend/dashboard.php';
 include '../../backend/getUserData.php';
 if(isset($_SESSION['id'])) { 
+        if ($_SESSION['rol'] == '2') {
+            header('Location: ../paciente/dashboard.php');//validar que el usuario paciente no pueda acceder paginas del administrador
+        }
     $userData = getUserData($_SESSION['id']);
     $name = $userData['nombre'];
     $last_name = $userData['apellido'];
@@ -26,7 +29,7 @@ if(isset($_SESSION['id'])) {
     $stmt4->execute();
     $totalEspecialidades = $stmt4->fetch();
 
-    $stmt5 = $connect->prepare("SELECT ID_Usu, Nombre, Apellido, Identificacion FROM usuarios WHERE ID_Rol = 3 ORDER BY ID_Usu DESC LIMIT 5");
+    $stmt5 = $connect->prepare("SELECT ID_Usu, Nombre, Apellido, Identificacion FROM usuarios WHERE ID_Rol = 3 ORDER BY ID_Usu DESC LIMIT 5"); //Cambiar id_rol a 2
     $stmt5->execute();
     $Pacientes = $stmt5->fetchAll(PDO::FETCH_ASSOC);
 ?>
