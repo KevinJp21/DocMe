@@ -1,17 +1,28 @@
-<?php 
+<?php
 session_start();
-include '../../backend/config.php';
 include '../../backend/dashboard.php';
 include '../../backend/getUserData.php';
-if(isset($_SESSION['id'])) {
-    if ($_SESSION['rol'] == '1') {//validar que el usuario administrado no pueda acceder paginas de rol paciente
-        header('Location: ../admin/dashboard.php');
-    }
+include '../../backend/config.php';
+
+if (isset($_SESSION['id'])) {
     $userData = getUserData($_SESSION['id']);
     $name = $userData['nombre'];
     $last_name = $userData['apellido'];
     $user_name = $userData['user_name'];
     $rol = $userData['rol'];
+
+    $stmt = $connect->prepare('SELECT * FROM usuarios, medicos, especialidad, consultorios WHERE usuarios.id_usu = medicos.id_usu AND medicos.ID_Esp = especialidad.ID_Esp AND medicos.ID_Con = consultorios.ID_Con');
+    $stmt->execute();
+    $listMed = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $stmt2 = $connect->prepare('SELECT * FROM usuarios, pacientes WHERE usuarios.id_usu = pacientes.id_usu');
+    $stmt2->execute();
+    $listPac = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+
+    $stmt3 = $connect->prepare('SELECT c.Estado, c.Motivo, c.FechaCita FROM citas c, pacientes p , medicos m WHERE c.id_paciente = p.id_usu AND c.id_med = m.id_usu');
+    $stmt3->execute();
+    $listCita = $stmt3->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <head>
@@ -26,12 +37,12 @@ if(isset($_SESSION['id'])) {
     <script src="https://unpkg.com/vanilla-datatables@latest/dist/vanilla-dataTables.min.js" type="text/javascript">
     </script>
     <link rel="stylesheet" href="../../frontend/css/windows_admin.css">
-    <link rel="stylesheet" href="../../frontend/css/dashboard.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 
 <body>
     <div class="sidebar">
-        <div class="logo-datails">
+    <div class="logo-datails">
             <img src="../../img/logo_docme.png" alt="">
             <section class="home-section">
                 <div class="home-content">
@@ -106,19 +117,74 @@ if(isset($_SESSION['id'])) {
                 </a>
             </li>
         </ul>
-
-
+        
         <div class="content-area">
-            <div class="greeting">
-                <span class="fs-5">Bienvenido(a), <?php echo $user_name; ?></span>
+            <div class="container-fluid row">
+                <div class="btn-add-container col-12 ps-4 pt-4">
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#addCita" class="btn-add">Agendar
+                        Cita</button>
+                    <?php include '../../backend/paciente/addCita.php'; ?>
+                </div>
+                <div class="col-12 p-4">
+                    <table class="table-striped" id="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th>
+                                <th scope="col">Identificación</th>
+                                <th scope="col">Correo</th>
+                                <th scope="col">Teléfono</th>
+                                <th scope="col">Fecha cita</th>
+                                <th scope="col">Motivo</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Medico</th>
+                                <th scope="col">Especialidad</th>
+                                <th scope="col">Consultorio</th>
+                                <th>Editar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                        $i = 0;
+                        foreach ($listMed as $medico) {
+                            foreach ($listPac as $paciente) {
+                                foreach ($listCita as $cita) {
+                            ?>
+                            <tr>
+                                <td scope="row"><?php echo $i = $i + 1; ?></td>
+                                <td><?php echo $paciente['Nombre']; ?></td>
+                                <td><?php echo $paciente['Apellido']; ?></td>
+                                <td><?php echo $paciente['Identificacion']; ?></td>
+                                <td><?php echo $paciente['Correo']; ?></td>
+                                <td><?php echo $paciente['Telefono']; ?></td>
+                                <td><?php echo $cita['FechaCita']; ?></td>
+                                <td><?php echo $cita['Motivo']; ?></td>
+                                <td><?php echo $cita['Estado']; ?></td>
+                                <td><?php echo $medico['Nombre']; ?> <?php echo $medico['Apellido']; ?></td>
+                                <td><?php echo $medico['Descripcion']; ?></td>
+                                <td><?php echo $medico['Desc_Con']; ?></td>
+                                <td>
+                                    <button type="button" data-bs-toggle="modal" class="btn btn-edit"
+                                        data-bs-target="#editMed<?php echo $medico['ID_Usu']; ?>"><i
+                                            class="fa-solid fa-pen-to-square" name="btnEdit"
+                                            value="btnEdit"></i></button>
+                                </td>
+                            </tr>
+                            <?php include '../../backend/admin/editMed.php'; ?>
+                            <?php }}}?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <!--Footer elements-->
-            <?php include '../tamplates/footer.php';?>
+            <?php include '../tamplates/footer.php'; ?>
         </div>
 
     </div>
 
-    </div>
+
+
     <script>
         let sidebar = document.querySelector(".sidebar");
         let sidebarBtn = document.querySelector(".bx-menu");
@@ -127,12 +193,17 @@ if(isset($_SESSION['id'])) {
             sidebar.classList.toggle("close");
         });
     </script>
+    <script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
     <script src="https://kit.fontawesome.com/ab205d1cfa.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
+    </script>
+    <script>
+        var table = document.querySelector("#table");
+        var dataTable = new DataTable(table);
     </script>
 </body>
 
