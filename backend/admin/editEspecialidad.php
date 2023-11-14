@@ -1,4 +1,3 @@
-</style>
 <div class="modal fade" id="EditEsp<?php echo $especialidad['ID_Esp']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

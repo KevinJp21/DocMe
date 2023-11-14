@@ -39,6 +39,8 @@ if (isset($_POST['login'])) {
                         header('location: ../frontend/admin/dashboard.php');
                     }else if($data['ID_Rol'] == '2'){
                         header('location: ../frontend/paciente/dashboard.php');
+                    }else if($data['ID_Rol'] == '3'){
+                        header('location: ../frontend/medico/dashboard.php');
                     }
                 } else {
                     $errMsg = 'Contraseña incorrecta.';

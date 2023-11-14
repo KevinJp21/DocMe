@@ -6,8 +6,8 @@ include '../../backend/getUserData.php';
 if(isset($_SESSION['id'])) {
     if ($_SESSION['rol'] == '1') {//validar que el usuario administrado no pueda acceder paginas de rol paciente
         header('Location: ../admin/dashboard.php');
-    }else if ($_SESSION['rol'] == '3') { 
-        header('Location: ../medico/dashboard.php');
+    }else if ($_SESSION['rol'] == '2') { 
+        header('Location: ../paciente/dashboard.php');
     }
     $userData = getUserData($_SESSION['id']);
     $name = $userData['nombre'];
@@ -59,7 +59,7 @@ if(isset($_SESSION['id'])) {
                 </div>
             </a>
             <li class="mt-4">
-                <a href="../paciente/citas.php">
+                <a href="../medico/citas.php">
                     <svg width="30" height="32" viewBox="0 0 30 32" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path

@@ -22,6 +22,12 @@ if (isset($_POST['accion'])) {
         case 'EditEsp';
             editEsp();
             break;
+        case 'addCita';
+            addCita();
+            break;
+        case 'editCita';
+            editCita();
+            break;
     }
 }
 function add(){
@@ -313,6 +319,87 @@ function addEsp(){
             });
         </script>
         ";
+    }
+}
+
+function addCita(){
+    extract($_POST);
+    require_once '../config.php';
+
+    $stmt = $connect->prepare("INSERT INTO  citas (Motivo) VALUES ('$reason')");
+    $stmt->execute();
+    $result = $stmt;
+
+    if($result){
+        echo "
+        <script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
+        <script language='JavaScript'>
+            document.addEventListener('DOMContentLoaded', function(){
+                swal({
+                    title: '¡La cita se agregó correctamente!',
+                    icon: 'success',
+                    button: 'OK',
+                  }).then(() => {
+                        location.assign('../../index.php');
+                });
+            });
+        </script>
+        ";
+} else {
+    echo "
+        <script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
+        <script language='JavaScript'>
+            document.addEventListener('DOMContentLoaded', function(){
+                swal({
+                    title: '¡Algo salio mal!',
+                    icon: 'error',
+                    button: 'OK',
+                  }).then(() => {
+                    location.assign('../../index.phpp');
+                });
+            });
+        </script>
+        ";
+    }
+}
+
+function editCita(){
+    extract($_POST);
+    require_once '../config.php';
+    $stmt = $connect->prepare("UPDATE Citas SET Motivo = '$reason' WHERE ID_Cita = '$id'");
+    $stmt->execute();
+    $result = $stmt;
+
+    if ($result) {
+        echo "
+            <script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
+            <script language='JavaScript'>
+                document.addEventListener('DOMContentLoaded', function(){
+                    swal({
+                        title: '¡Datos actualizados correctamente!',
+                        icon: 'success',
+                        button: 'OK',
+                      }).then(() => {
+                            location.assign('../../index.php');
+                    });
+                });
+            </script>
+            ";
+    } else {
+        echo "
+            <script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
+            <script language='JavaScript'>
+                document.addEventListener('DOMContentLoaded', function(){
+                    swal({
+                        title: '¡Algo salio mal!',
+                        icon: 'error',
+                        button: 'OK',
+                      }).then(() => {
+                        location.assign('../../index.phpp');
+                    });
+                });
+            </script>
+            ";
     }
 }
 

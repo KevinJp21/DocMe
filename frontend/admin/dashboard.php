@@ -4,9 +4,11 @@ include '../../backend/config.php';
 include '../../backend/dashboard.php';
 include '../../backend/getUserData.php';
 if(isset($_SESSION['id'])) { 
-        if ($_SESSION['rol'] == '2') {
-            header('Location: ../paciente/dashboard.php');//validar que el usuario paciente no pueda acceder paginas del administrador
-        }
+    if ($_SESSION['rol'] == '2') {//validar que el usuario administrado no pueda acceder paginas de rol paciente
+        header('Location: ../paciente/dashboard.php');
+    }else if ($_SESSION['rol'] == '3') { 
+        header('Location: ../medico/dashboard.php');
+    }
     $userData = getUserData($_SESSION['id']);
     $name = $userData['nombre'];
     $last_name = $userData['apellido'];

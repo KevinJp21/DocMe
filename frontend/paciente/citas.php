@@ -5,6 +5,11 @@ include '../../backend/getUserData.php';
 include '../../backend/config.php';
 
 if (isset($_SESSION['id'])) {
+        if ($_SESSION['rol'] == '1') {
+            header('Location: ../admin/citas.php');
+        }else if ($_SESSION['rol'] == '3') { 
+            header('Location: ../medico/citas.php');
+        }
     $userData = getUserData($_SESSION['id']);
     $name = $userData['nombre'];
     $last_name = $userData['apellido'];
