@@ -228,6 +228,7 @@ if (isset($_SESSION['id'])) {
         var table = document.querySelector("#table");
         var dataTable = new DataTable(table);
     </script>
+
 </body>
 
 </html>
